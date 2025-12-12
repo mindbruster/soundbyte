@@ -273,28 +273,34 @@ const questionnaireSections: QuestionSection[] = [
         required: true,
         options: [
           {
+            value: 'mini',
+            label: 'Mini',
+            description: '20 × 16 cm (framed: 25 × 21 cm) — Small gift, entry tier',
+            price: '$3,500 – $4,500'
+          },
+          {
+            value: 'extra-small',
+            label: 'Extra Small',
+            description: '30 × 24 cm (framed: 35 × 29 cm) — Great for gifting',
+            price: '$4,500 – $6,000'
+          },
+          {
             value: 'small',
             label: 'Small',
-            description: '44 × 35 cm (framed: 49 × 40 cm)',
-            price: '$3,500 – $5,000'
+            description: '44 × 35 cm (framed: 49 × 40 cm) — Popular mid-size',
+            price: '$6,000 – $8,000'
           },
           {
             value: 'medium',
             label: 'Medium',
-            description: '64 × 51 cm (framed: 69 × 56 cm)',
-            price: '$6,500 – $9,000'
+            description: '64 × 51 cm (framed: 69 × 56 cm) — Collector favourite',
+            price: '$8,000 – $12,000'
           },
           {
             value: 'large',
             label: 'Large',
-            description: '92 × 73 cm (framed: 97 × 78 cm)',
-            price: '$10,000 – $15,000'
-          },
-          {
-            value: 'ultra-large',
-            label: 'Ultra-Large / Brand',
-            description: '120+ cm (custom framing)',
-            price: '$18,000 – $50,000+'
+            description: '92 × 73 cm (framed: 97 × 78 cm) — Premium size',
+            price: '$12,000 – $15,000+'
           },
           {
             value: 'undecided',
@@ -372,10 +378,11 @@ const questionnaireSections: QuestionSection[] = [
         label: 'What is your approximate budget range?',
         type: 'select',
         options: [
-          { value: '3500-5000', label: '$3,500 – $5,000', description: 'Small format' },
-          { value: '6500-9000', label: '$6,500 – $9,000', description: 'Medium format' },
-          { value: '10000-15000', label: '$10,000 – $15,000', description: 'Large format' },
-          { value: '18000-plus', label: '$18,000+', description: 'Ultra-large / Brand commission' },
+          { value: '3500-4500', label: '$3,500 – $4,500', description: 'Mini format' },
+          { value: '4500-6000', label: '$4,500 – $6,000', description: 'Extra Small format' },
+          { value: '6000-8000', label: '$6,000 – $8,000', description: 'Small format' },
+          { value: '8000-12000', label: '$8,000 – $12,000', description: 'Medium format' },
+          { value: '12000-plus', label: '$12,000 – $15,000+', description: 'Large / Premium format' },
           { value: 'discuss', label: 'I\'d prefer to discuss', description: '' }
         ]
       }

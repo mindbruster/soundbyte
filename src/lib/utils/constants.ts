@@ -128,12 +128,14 @@ export const PRICING = {
 
 /**
  * SoundBYTE Size Options (for commission questionnaire)
+ * Custom SoundBYTE Originals - Bespoke museum-grade artworks
  */
 export const SOUNDBYTE_SIZES = [
-  { name: 'Small', unframed: '44 × 35 cm', framed: '49 × 40 cm', priceRange: '$3,500 – $5,000' },
-  { name: 'Medium', unframed: '64 × 51 cm', framed: '69 × 56 cm', priceRange: '$6,500 – $9,000' },
-  { name: 'Large', unframed: '92 × 73 cm', framed: '97 × 78 cm', priceRange: '$10,000 – $15,000' },
-  { name: 'Ultra-Large', unframed: '120+ cm', framed: 'Custom', priceRange: '$18,000 – $50,000+' },
+  { name: 'Mini', unframed: '20 × 16 cm', framed: '25 × 21 cm', priceRange: '$3,500 – $4,500', notes: 'Small gift, entry tier' },
+  { name: 'Extra Small', unframed: '30 × 24 cm', framed: '35 × 29 cm', priceRange: '$4,500 – $6,000', notes: 'Great for gifting' },
+  { name: 'Small', unframed: '44 × 35 cm', framed: '49 × 40 cm', priceRange: '$6,000 – $8,000', notes: 'Popular mid-size' },
+  { name: 'Medium', unframed: '64 × 51 cm', framed: '69 × 56 cm', priceRange: '$8,000 – $12,000', notes: 'Collector favourite' },
+  { name: 'Large', unframed: '92 × 73 cm', framed: '97 × 78 cm', priceRange: '$12,000 – $15,000+', notes: 'Premium size' },
 ] as const;
 
 /**

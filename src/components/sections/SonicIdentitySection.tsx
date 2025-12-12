@@ -6,135 +6,17 @@
  *
  * Key messaging:
  * - Fun, tech-driven, instant, global
- * - Clear pricing tiers
  * - Ships worldwide
  * - Perfect for gifts & personal moments
+ * - Different from SoundBYTE Originals (more accessible)
  */
 
-import { useState, useRef, useCallback } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Container } from '../ui/Container';
-import { Heading, Text, Label } from '../ui/Typography';
+import { Heading, Text } from '../ui/Typography';
 import { Button } from '../ui/Button';
 import { ScrollReveal, StaggerReveal } from '../animations/ScrollReveal';
-import { cn } from '../../lib/utils';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// PRICING TIER CARD - Interactive 3D Card
-// ═══════════════════════════════════════════════════════════════════════════
-
-interface PricingTierProps {
-  name: string;
-  price: string;
-  description: string;
-  features: string[];
-  popular?: boolean;
-  index: number;
-}
-
-function PricingTierCard({ name, price, description, features, popular, index }: PricingTierProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-
-  const springConfig = { stiffness: 150, damping: 20 };
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [8, -8]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-8, 8]), springConfig);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width);
-    mouseY.set((e.clientY - rect.top) / rect.height);
-  }, [mouseX, mouseY]);
-
-  const handleMouseLeave = useCallback(() => {
-    mouseX.set(0.5);
-    mouseY.set(0.5);
-    setIsHovered(false);
-  }, [mouseX, mouseY]);
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX: isHovered ? rotateX : 0,
-        rotateY: isHovered ? rotateY : 0,
-        transformStyle: 'preserve-3d',
-      }}
-      className="relative group"
-    >
-      {/* Popular badge */}
-      {popular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-          <span className="px-4 py-1.5 bg-gold-500 text-luxury-black text-xs font-bold rounded-full uppercase tracking-wider">
-            Most Popular
-          </span>
-        </div>
-      )}
-
-      <div className={cn(
-        'relative p-6 sm:p-8 rounded-2xl border transition-all duration-500 h-full',
-        popular
-          ? 'bg-gradient-to-b from-gold-500/15 to-gold-500/5 border-gold-500/40'
-          : 'bg-white/[0.02] border-white/10 hover:border-gold-500/30'
-      )}>
-        {/* Glow effect */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none"
-          animate={{
-            boxShadow: isHovered
-              ? '0 0 60px rgba(212, 168, 83, 0.2), inset 0 0 30px rgba(212, 168, 83, 0.05)'
-              : '0 0 0px rgba(212, 168, 83, 0)',
-          }}
-          transition={{ duration: 0.5 }}
-        />
-
-        {/* Content */}
-        <div className="relative">
-          <h4 className="font-display text-xl text-white font-semibold mb-2">
-            {name}
-          </h4>
-          <div className="mb-4">
-            <span className="font-display text-3xl sm:text-4xl text-gradient-gold font-bold">
-              {price}
-            </span>
-          </div>
-          <p className="text-white/60 text-sm mb-6 leading-relaxed">
-            {description}
-          </p>
-
-          <ul className="space-y-3 mb-8">
-            {features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-3 text-white/70 text-sm">
-                <svg className="w-5 h-5 mt-0.5 text-gold-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-
-          <Button
-            variant={popular ? 'primary' : 'outline'}
-            size="lg"
-            fullWidth
-          >
-            Order Now
-          </Button>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // HOW IT WORKS STEP
@@ -174,75 +56,6 @@ function HowItWorksStep({ number, title, description, icon }: HowItWorksStepProp
 export function SonicIdentitySection() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Pricing tiers based on Amrita's pricing
-  const pricingTiers = [
-    {
-      name: 'Digital Only',
-      price: '$49–$199',
-      description: 'Perfect for digital display or DIY printing',
-      features: [
-        'High-resolution digital file',
-        'Multiple format options (PNG, PDF)',
-        'Instant download delivery',
-        'Social media optimized versions',
-        'Perfect for digital frames'
-      ]
-    },
-    {
-      name: 'Small Print',
-      price: '$99–$299',
-      description: 'Museum-quality print, ready to display',
-      popular: true,
-      features: [
-        'Premium archival paper or canvas',
-        'Sizes: 20×16 to 30×24 cm',
-        'Unframed or framed options',
-        'Ships worldwide in 7-10 days',
-        'Certificate of authenticity',
-        'Perfect for gifting'
-      ]
-    },
-    {
-      name: 'Medium Print',
-      price: '$249–$799',
-      description: 'Statement piece for living spaces',
-      features: [
-        'Gallery-grade paper or canvas',
-        'Sizes: 44×35 to 64×51 cm',
-        'Framing options available',
-        'Professional packaging',
-        'Certificate of authenticity',
-        'Collector favourite'
-      ]
-    },
-    {
-      name: 'Large Print',
-      price: '$499–$1,400',
-      description: 'Impressive centerpiece artwork',
-      features: [
-        'Premium canvas or paper',
-        'Sizes: 92×73 cm and up',
-        'Custom framing available',
-        'White glove delivery option',
-        'Certificate of authenticity',
-        'Premium size'
-      ]
-    },
-    {
-      name: 'Luxury Aluminium',
-      price: 'Up to $3,500',
-      description: 'Ultra-premium museum finish',
-      features: [
-        'Aluminium dibond mounting',
-        'Floating frame included',
-        'Stunning visual depth',
-        'Sizes up to 120×100 cm',
-        'White glove installation',
-        'The ultimate statement'
-      ]
-    }
-  ];
-
   // Icons
   const icons = {
     record: (
@@ -268,6 +81,26 @@ export function SonicIdentitySection() {
     )
   };
 
+  // Features
+  const features = [
+    {
+      title: 'Digital & Print Options',
+      description: 'From instant digital downloads to premium framed prints shipped worldwide'
+    },
+    {
+      title: 'Multiple Sizes',
+      description: 'Choose from various sizes to fit any space — desk, wall, or gallery'
+    },
+    {
+      title: 'Fast Turnaround',
+      description: 'Digital files delivered instantly, prints ship within 7-14 days'
+    },
+    {
+      title: 'Perfect Gifts',
+      description: 'Capture voices, vows, first words, or any meaningful sound'
+    }
+  ];
+
   return (
     <section
       ref={sectionRef}
@@ -281,7 +114,7 @@ export function SonicIdentitySection() {
       </div>
 
       <Container size="xl">
-        {/* Section Header - Establishes this as a PRODUCT */}
+        {/* Section Header */}
         <ScrollReveal direction="up" className="text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/30 mb-6">
             <span className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
@@ -293,8 +126,8 @@ export function SonicIdentitySection() {
           </Heading>
 
           <Text size="xl" color="secondary" align="center" className="max-w-3xl mx-auto leading-relaxed mb-4">
-            Own a piece of Amrita's signature sound art — <span className="text-white">at an accessible price point</span>.
-            Transform any voice or sound into stunning visual art, printed and shipped globally.
+            Own a piece of Amrita's signature sound art — <span className="text-white">accessible to everyone</span>.
+            Transform any voice or sound into stunning visual art.
           </Text>
 
           <Text size="lg" color="muted" align="center" className="max-w-2xl mx-auto">
@@ -302,7 +135,7 @@ export function SonicIdentitySection() {
           </Text>
         </ScrollReveal>
 
-        {/* How It Works - Simple 4 steps */}
+        {/* How It Works */}
         <ScrollReveal direction="up" className="mb-20 sm:mb-24">
           <h3 className="font-display text-2xl text-white text-center mb-12">
             How It Works
@@ -317,7 +150,7 @@ export function SonicIdentitySection() {
             <HowItWorksStep
               number="2"
               title="Customize"
-              description="Choose your style, colors, and size"
+              description="Choose your style, colors, and format"
               icon={icons.customize}
             />
             <HowItWorksStep
@@ -329,35 +162,29 @@ export function SonicIdentitySection() {
             <HowItWorksStep
               number="4"
               title="Receive"
-              description="Ships worldwide in 7-14 days"
+              description="Download or get it shipped globally"
               icon={icons.ship}
             />
           </div>
         </ScrollReveal>
 
-        {/* Pricing Tiers Grid */}
-        <ScrollReveal direction="up" className="mb-8">
-          <h3 className="font-display text-2xl text-white text-center mb-4">
-            Choose Your Format
-          </h3>
-          <p className="text-white/60 text-center mb-12 max-w-xl mx-auto">
-            From digital downloads to luxury aluminium prints — find the perfect option for your space and budget.
-          </p>
-        </ScrollReveal>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16">
-          {pricingTiers.map((tier, index) => (
-            <PricingTierCard
-              key={tier.name}
-              name={tier.name}
-              price={tier.price}
-              description={tier.description}
-              features={tier.features}
-              popular={tier.popular}
-              index={index}
-            />
+        {/* Features Grid */}
+        <StaggerReveal direction="up" className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {features.map((feature) => (
+            <motion.div
+              key={feature.title}
+              whileHover={{ y: -5 }}
+              className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-gold-500/30 transition-all duration-500"
+            >
+              <h4 className="font-display text-lg text-white font-semibold mb-2">
+                {feature.title}
+              </h4>
+              <p className="text-white/60 text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </motion.div>
           ))}
-        </div>
+        </StaggerReveal>
 
         {/* Trust signals */}
         <StaggerReveal direction="up" className="grid sm:grid-cols-3 gap-6 mb-16">

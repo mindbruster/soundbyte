@@ -14,7 +14,7 @@
  */
 
 import { useRef, useEffect, useCallback, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useMotionValue, useSpring } from 'framer-motion';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // MATHEMATICAL WAVE FUNCTIONS

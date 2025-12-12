@@ -16,7 +16,117 @@ import { Container } from '../ui/Container';
 import { Heading, Text, Label } from '../ui/Typography';
 import { Button } from '../ui/Button';
 import { ScrollReveal, StaggerReveal } from '../animations/ScrollReveal';
-import { PRICING } from '../../lib/utils/constants';
+import { PRICING, SOUNDBYTE_SIZES } from '../../lib/utils/constants';
+import { cn } from '../../lib/utils';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SIZE PRICING CARD COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════
+
+interface SizePricingCardProps {
+  name: string;
+  unframed: string;
+  framed: string;
+  priceRange: string;
+  notes: string;
+  index: number;
+  popular?: boolean;
+}
+
+function SizePricingCard({ name, unframed, framed, priceRange, notes, index, popular }: SizePricingCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+
+  const springConfig = { stiffness: 150, damping: 20 };
+  const rotateX = useSpring(useTransform(mouseY, [0, 1], [8, -8]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-8, 8]), springConfig);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width);
+    mouseY.set((e.clientY - rect.top) / rect.height);
+  }, [mouseX, mouseY]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+    setIsHovered(false);
+  }, [mouseX, mouseY]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.6 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX: isHovered ? rotateX : 0,
+        rotateY: isHovered ? rotateY : 0,
+        transformStyle: 'preserve-3d',
+      }}
+      className="relative group"
+    >
+      {/* Popular badge */}
+      {popular && (
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+          <span className="px-4 py-1.5 bg-gold-500 text-luxury-black text-xs font-bold rounded-full uppercase tracking-wider">
+            Most Popular
+          </span>
+        </div>
+      )}
+
+      <div className={cn(
+        'relative p-6 rounded-2xl border transition-all duration-500 h-full',
+        popular
+          ? 'bg-gradient-to-b from-gold-500/15 to-gold-500/5 border-gold-500/40'
+          : 'bg-white/[0.02] border-white/10 hover:border-gold-500/30'
+      )}>
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none"
+          animate={{
+            boxShadow: isHovered
+              ? '0 0 60px rgba(212, 168, 83, 0.2), inset 0 0 30px rgba(212, 168, 83, 0.05)'
+              : '0 0 0px rgba(212, 168, 83, 0)',
+          }}
+          transition={{ duration: 0.5 }}
+        />
+
+        {/* Content */}
+        <div className="relative">
+          <h4 className="font-display text-xl text-white font-semibold mb-2">
+            {name}
+          </h4>
+          <div className="mb-4">
+            <span className="font-display text-2xl sm:text-3xl text-gradient-gold font-bold">
+              {priceRange}
+            </span>
+          </div>
+
+          <div className="space-y-2 mb-4 text-sm">
+            <p className="text-white/60">
+              <span className="text-white/40">Unframed:</span> {unframed}
+            </p>
+            <p className="text-white/60">
+              <span className="text-white/40">Framed:</span> {framed}
+            </p>
+          </div>
+
+          <p className="text-gold-500/80 text-sm italic">
+            {notes}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PROCESS STEP COMPONENT - Interactive with 3D hover
@@ -412,7 +522,7 @@ export function SoundByteSection() {
           />
           <FeatureHighlight
             title="Custom Dimensions"
-            description="From intimate 60cm pieces to statement 200cm+ installations for grand spaces."
+            description="From intimate 20cm pieces to statement 92cm+ installations for grand spaces."
           />
           <FeatureHighlight
             title="White Glove Service"
@@ -428,7 +538,32 @@ export function SoundByteSection() {
           />
         </StaggerReveal>
 
-        {/* Luxury CTA - No price list (like high-end galleries) */}
+        {/* Size & Pricing Grid */}
+        <ScrollReveal direction="up" className="mb-8">
+          <h3 className="font-display text-2xl text-white text-center mb-4">
+            Choose Your Size
+          </h3>
+          <p className="text-white/60 text-center mb-12 max-w-xl mx-auto">
+            {PRICING.anchorText}
+          </p>
+        </ScrollReveal>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-20">
+          {SOUNDBYTE_SIZES.map((size, index) => (
+            <SizePricingCard
+              key={size.name}
+              name={size.name}
+              unframed={size.unframed}
+              framed={size.framed}
+              priceRange={size.priceRange}
+              notes={size.notes}
+              index={index}
+              popular={size.name === 'Small'}
+            />
+          ))}
+        </div>
+
+        {/* Luxury CTA */}
         <ScrollReveal direction="up" className="text-center">
           <div className="inline-block p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-white/[0.03] to-transparent border border-white/10">
             <p className="text-white/40 text-sm uppercase tracking-widest mb-6">
@@ -437,12 +572,9 @@ export function SoundByteSection() {
             <h3 className="font-display text-3xl sm:text-4xl text-white font-semibold mb-6">
               Begin Your <span className="text-gradient-gold">SoundBYTE®</span> Journey
             </h3>
-            <p className="text-white/60 text-base mb-4 max-w-lg mx-auto leading-relaxed">
+            <p className="text-white/60 text-base mb-8 max-w-lg mx-auto leading-relaxed">
               Each commission begins with a personal consultation to understand your vision,
               the sounds that matter to you, and how to translate them into timeless art.
-            </p>
-            <p className="text-white/50 text-sm mb-8 max-w-md mx-auto italic">
-              {PRICING.anchorText}
             </p>
             <Button
               variant="primary"

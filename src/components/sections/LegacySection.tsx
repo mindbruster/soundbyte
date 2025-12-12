@@ -359,6 +359,38 @@ export function LegacySection() {
           ))}
         </div>
 
+        {/* Artist Gallery - Behind the Scenes */}
+        <ScrollReveal direction="up" className="mb-24 sm:mb-32">
+          <div className="text-center mb-8">
+            <Label variant="gold">Behind The Art</Label>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[2, 3, 4, 5, 6].map((num, index) => (
+              <motion.div
+                key={num}
+                className="relative group aspect-square overflow-hidden rounded-2xl"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+              >
+                {/* Image */}
+                <img
+                  src={`/images/artist/amrita${num}.avif`}
+                  alt={`Amrita Sethi at work ${num}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Gold border on hover */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-gold-500/0 group-hover:border-gold-500/50 transition-all duration-500" />
+              </motion.div>
+            ))}
+          </div>
+        </ScrollReveal>
+
         {/* Two-column layout: Exhibitions + Achievements */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Featured Exhibitions */}

@@ -88,11 +88,11 @@ function App() {
         {/* SoundBYTE Originals */}
         <SoundByteSection />
 
-        {/* Sonic Identity */}
-        <SonicIdentitySection />
-
-        {/* Commission Questionnaire - Premium Journey */}
+        {/* Commission Questionnaire - Part of SoundBYTE Originals journey */}
         <CommissionQuestionnaire />
+
+        {/* Sonic Identity - Accessible product line */}
+        <SonicIdentitySection />
 
         {/* Footer */}
         <FooterSection />
