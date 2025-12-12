@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fefce8;
+  --color-gold-100: #fef9c3;
+  --color-gold-200: #fef08a;
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-500: #d4a853;
+  --color-gold-600: #c9a227;
+  --color-gold-700: #a16207;
+  --color-gold-800: #854d0e;
+  --color-gold-900: #713f12;
+  
+  --color-luxury-black: #0a0a0a;
+  --color-luxury-dark: #141414;
+  --color-luxury-gray: #1a1a1a;
+  --color-luxury-light: #2a2a2a;
+  
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-luxury-black text-white font-sans antialiased;
+  }
+  
+  ::selection {
+    @apply bg-gold-500/30;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 bg-clip-text text-transparent;
+  }
+
+  .border-gradient-gold {
+    border-image: linear-gradient(90deg, var(--color-gold-400), var(--color-gold-600)) 1;
+  }
+
+  /* Typography utilities */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-sans);
+  }
+
+  /* Background utilities */
+  .bg-luxury-charcoal {
+    background-color: var(--color-luxury-dark);
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gold-500) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--color-gold-500);
+    border-radius: 3px;
+  }
+}
