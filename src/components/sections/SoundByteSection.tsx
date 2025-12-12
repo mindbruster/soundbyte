@@ -12,6 +12,7 @@
  */
 
 import { useRef, useState, useCallback, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { Container } from '../ui/Container';
 import { Heading, Text, Label } from '../ui/Typography';
@@ -871,24 +872,26 @@ export function SoundByteSection() {
               Each commission begins with a personal consultation to understand your vision,
               the sounds that matter to you, and how to translate them into timeless art.
             </p>
-            <Button
-              variant="primary"
-              size="xl"
-              rightIcon={
-                <motion.svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </motion.svg>
-              }
-            >
-              Request a Consultation
-            </Button>
+            <Link to="/commission">
+              <Button
+                variant="primary"
+                size="xl"
+                rightIcon={
+                  <motion.svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </motion.svg>
+                }
+              >
+                Request a Consultation
+              </Button>
+            </Link>
             <p className="mt-6 text-white/40 text-sm">
               Complimentary consultation • No obligation
             </p>

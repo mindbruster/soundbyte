@@ -5,11 +5,12 @@
  * Features:
  * - Transparent to solid on scroll
  * - Mobile hamburger menu
- * - Smooth scroll to sections
- * - Active section indicator
+ * - React Router navigation
+ * - Active route indicator
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { Button } from './Button';
 import { cn } from '../../lib/utils';
@@ -22,13 +23,14 @@ import { springs, durations } from '../../lib/animations';
 interface NavItem {
   href: string;
   label: string;
+  isRoute?: boolean;
 }
 
 const navItems: NavItem[] = [
-  { href: '#legacy', label: 'About' },
-  { href: '#portfolio', label: 'Portfolio' },
-  { href: '#soundbyte', label: 'SoundBYTE' },
-  { href: '#sonic-identity', label: 'Sonic Identity' }
+  { href: '/about', label: 'About', isRoute: true },
+  { href: '/portfolio', label: 'Portfolio', isRoute: true },
+  { href: '/soundbyte', label: 'SoundBYTE', isRoute: true },
+  { href: '/sonic-identity', label: 'Sonic Identity', isRoute: true }
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -40,10 +42,11 @@ interface NavLinkProps {
   children: string;
   isActive?: boolean;
   onClick?: () => void;
+  isRoute?: boolean;
 }
 
-function NavLink({ href, children, isActive, onClick }: NavLinkProps) {
-  const linkRef = useRef<HTMLAnchorElement>(null);
+function NavLink({ href, children, isActive, onClick, isRoute }: NavLinkProps) {
+  const linkRef = useRef<HTMLDivElement>(null);
 
   // Motion values for magnetic effect
   const x = useMotionValue(0);
@@ -91,28 +94,8 @@ function NavLink({ href, children, isActive, onClick }: NavLinkProps) {
     };
   }, [x, y]);
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-    onClick?.();
-  };
-
-  return (
-    <motion.a
-      ref={linkRef}
-      href={href}
-      onClick={handleClick}
-      style={{ x: xSpring, y: ySpring }}
-      className={cn(
-        'relative text-sm font-medium transition-colors duration-300 inline-block',
-        isActive ? 'text-gold-500' : 'text-white/70 hover:text-white'
-      )}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
-    >
+  const linkContent = (
+    <>
       {children}
       {isActive && (
         <motion.div
@@ -121,7 +104,58 @@ function NavLink({ href, children, isActive, onClick }: NavLinkProps) {
           transition={{ type: 'spring', ...springs.snappy }}
         />
       )}
-    </motion.a>
+    </>
+  );
+
+  if (isRoute) {
+    return (
+      <motion.div
+        ref={linkRef}
+        style={{ x: xSpring, y: ySpring }}
+        className="inline-block"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <Link
+          to={href}
+          onClick={onClick}
+          className={cn(
+            'relative text-sm font-medium transition-colors duration-300 inline-block',
+            isActive ? 'text-gold-500' : 'text-white/70 hover:text-white'
+          )}
+        >
+          {linkContent}
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      ref={linkRef}
+      style={{ x: xSpring, y: ySpring }}
+      className="inline-block"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      <a
+        href={href}
+        onClick={(e) => {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+          onClick?.();
+        }}
+        className={cn(
+          'relative text-sm font-medium transition-colors duration-300 inline-block',
+          isActive ? 'text-gold-500' : 'text-white/70 hover:text-white'
+        )}
+      >
+        {linkContent}
+      </a>
+    </motion.div>
   );
 }
 
@@ -169,53 +203,38 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
 
             {/* Logo */}
             <div className="mb-12">
-              <span className="font-display text-2xl text-white font-bold">
+              <Link to="/" onClick={onClose} className="font-display text-2xl text-white font-bold">
                 Amrita <span className="text-gradient-gold">Sethi</span>
-              </span>
+              </Link>
             </div>
 
             {/* Nav links */}
             <div className="space-y-6">
               {navItems.map((item) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const target = document.querySelector(item.href);
-                    if (target) {
-                      target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                    onClose();
-                  }}
-                  className={cn(
-                    'block text-2xl font-display font-semibold transition-colors',
-                    activeSection === item.href.slice(1)
-                      ? 'text-gold-500'
-                      : 'text-white/70 hover:text-white'
-                  )}
-                  whileHover={{ x: 10 }}
-                >
-                  {item.label}
-                </motion.a>
+                <motion.div key={item.href} whileHover={{ x: 10 }}>
+                  <Link
+                    to={item.href}
+                    onClick={onClose}
+                    className={cn(
+                      'block text-2xl font-display font-semibold transition-colors',
+                      activeSection === item.href
+                        ? 'text-gold-500'
+                        : 'text-white/70 hover:text-white'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
             </div>
 
             {/* CTA */}
             <div className="absolute bottom-8 left-8 right-8">
-              <Button
-                variant="primary"
-                fullWidth
-                onClick={() => {
-                  const target = document.querySelector('#commission');
-                  if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                  }
-                  onClose();
-                }}
-              >
-                Commission
-              </Button>
+              <Link to="/commission" onClick={onClose}>
+                <Button variant="primary" fullWidth>
+                  Commission
+                </Button>
+              </Link>
             </div>
           </motion.nav>
         </>
@@ -229,7 +248,7 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function MagneticLogo() {
-  const logoRef = useRef<HTMLAnchorElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -281,20 +300,20 @@ function MagneticLogo() {
   }, [x, y, rotate]);
 
   return (
-    <motion.a
+    <motion.div
       ref={logoRef}
-      href="#hero"
-      onClick={(e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }}
       style={{ x: xSpring, y: ySpring, rotate: rotateSpring }}
-      className="font-display text-xl sm:text-2xl text-white font-bold inline-block"
+      className="inline-block"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.98 }}
     >
-      Amrita <span className="text-gradient-gold">Sethi</span>
-    </motion.a>
+      <Link
+        to="/"
+        className="font-display text-xl sm:text-2xl text-white font-bold inline-block"
+      >
+        Amrita <span className="text-gradient-gold">Sethi</span>
+      </Link>
+    </motion.div>
   );
 }
 
@@ -305,7 +324,8 @@ function MagneticLogo() {
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   // Handle scroll for background change
   useEffect(() => {
@@ -315,29 +335,6 @@ export function Navigation() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Track active section
-  useEffect(() => {
-    const sections = ['hero', 'legacy', 'portfolio', 'soundbyte', 'sonic-identity', 'commission'];
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' }
-    );
-
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -351,13 +348,6 @@ export function Navigation() {
       document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
-
-  const handleCommissionClick = useCallback(() => {
-    const target = document.querySelector('#commission');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
 
   return (
     <>
@@ -383,7 +373,8 @@ export function Navigation() {
                 <NavLink
                   key={item.href}
                   href={item.href}
-                  isActive={activeSection === item.href.slice(1)}
+                  isActive={currentPath === item.href}
+                  isRoute={item.isRoute}
                 >
                   {item.label}
                 </NavLink>
@@ -393,13 +384,11 @@ export function Navigation() {
             {/* CTA and mobile menu button */}
             <div className="flex items-center gap-4">
               <div className="hidden sm:block">
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={handleCommissionClick}
-                >
-                  Commission
-                </Button>
+                <Link to="/commission">
+                  <Button variant="primary" size="sm">
+                    Commission
+                  </Button>
+                </Link>
               </div>
 
               {/* Mobile menu button */}
@@ -421,7 +410,7 @@ export function Navigation() {
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-        activeSection={activeSection}
+        activeSection={currentPath}
       />
     </>
   );

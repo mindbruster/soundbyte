@@ -12,6 +12,7 @@
  */
 
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Container } from '../ui/Container';
 import { Heading, Text } from '../ui/Typography';
@@ -218,17 +219,19 @@ export function SonicIdentitySection() {
             ))}
           </div>
 
-          <Button
-            variant="primary"
-            size="xl"
-            rightIcon={
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            }
-          >
-            Create Your Sonic Identity™
-          </Button>
+          <Link to="/sonic-identity">
+            <Button
+              variant="primary"
+              size="xl"
+              rightIcon={
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              }
+            >
+              Create Your Sonic Identity™
+            </Button>
+          </Link>
           <p className="mt-4 text-white/40 text-sm">
             Free preview • Satisfaction guaranteed • Ships worldwide
           </p>

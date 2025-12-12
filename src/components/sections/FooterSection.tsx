@@ -10,6 +10,7 @@
  */
 
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
@@ -52,12 +53,12 @@ interface NavLinkProps {
 
 function NavLink({ href, children }: NavLinkProps) {
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="text-white/50 hover:text-gold-500 text-sm transition-colors duration-300"
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -138,12 +139,13 @@ export function FooterSection() {
   };
 
   const navigationLinks = [
-    { href: '#hero', label: 'Home' },
-    { href: '#legacy', label: 'About' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#soundbyte', label: 'SoundBYTE Originals™' },
-    { href: '#sonic-identity', label: 'Sonic Identity™' },
-    { href: '#commission', label: 'Commission' }
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/soundbyte', label: 'SoundBYTE Originals™' },
+    { href: '/sonic-identity', label: 'Sonic Identity™' },
+    { href: '/commission', label: 'Commission' },
+    { href: '/contact', label: 'Contact' }
   ];
 
   const studioInfo = {
@@ -164,9 +166,9 @@ export function FooterSection() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <ScrollReveal direction="up">
-              <h3 className="font-display text-2xl text-white font-bold mb-4">
+              <Link to="/" className="font-display text-2xl text-white font-bold mb-4 block">
                 Amrita <span className="text-gradient-gold">Sethi</span>
-              </h3>
+              </Link>
               <p className="text-white/60 text-sm mb-2">
                 Sound Artist • Inventor of SoundBYTEs® • Dubai's First NFT Artist
               </p>

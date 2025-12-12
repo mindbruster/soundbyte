@@ -10,6 +10,7 @@
  */
 
 import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -421,28 +422,32 @@ export function HeroSection() {
             transition={{ delay: 2.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button
-              variant="primary"
-              size="lg"
-              data-cursor="Commission"
-              rightIcon={
-                <motion.svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </motion.svg>
-              }
-            >
-              Commission Your Piece
-            </Button>
-            <Button variant="outline" size="lg" data-cursor="Explore">
-              Explore the Collection
-            </Button>
+            <Link to="/commission">
+              <Button
+                variant="primary"
+                size="lg"
+                data-cursor="Commission"
+                rightIcon={
+                  <motion.svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </motion.svg>
+                }
+              >
+                Commission Your Piece
+              </Button>
+            </Link>
+            <Link to="/portfolio">
+              <Button variant="outline" size="lg" data-cursor="Explore">
+                Explore the Collection
+              </Button>
+            </Link>
           </motion.div>
 
           {/* Price anchoring */}
