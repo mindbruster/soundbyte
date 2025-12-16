@@ -127,6 +127,47 @@ export const easings = {
    * Use for: Link hovers, card hovers, icon states
    */
   smoothHover: [0.4, 0, 0.2, 1] as EasingArray,
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SOUND WAVE INSPIRED CURVES
+  // These curves mimic the organic flow of audio waveforms
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Wave flow - mimics the smooth rise and fall of a sine wave
+   * Use for: Hero text reveals, organic transitions, sound-related animations
+   */
+  waveFlow: [0.4, 0, 0.2, 1] as EasingArray,
+
+  /**
+   * Wave pulse - quick attack, sustained release like a sound pulse
+   * Use for: Stats counting, pulse effects, attention grabbers
+   */
+  wavePulse: [0.25, 0.46, 0.45, 0.94] as EasingArray,
+
+  /**
+   * Wave crescendo - gradual build to climax, like music crescendo
+   * Use for: Hero entrance, dramatic reveals, building anticipation
+   */
+  waveCrescendo: [0.19, 1, 0.22, 1] as EasingArray,
+
+  /**
+   * Wave decrescendo - smooth fade out like ending note
+   * Use for: Exit animations, fade outs, gentle departures
+   */
+  waveDecrescendo: [0.55, 0.085, 0.68, 0.53] as EasingArray,
+
+  /**
+   * Wave resonance - slight overshoot like audio resonance
+   * Use for: Button feedback, interactive elements, emphasis
+   */
+  waveResonance: [0.175, 0.885, 0.32, 1.1] as EasingArray,
+
+  /**
+   * Wave harmonic - smooth oscillation feel
+   * Use for: Looping animations, ambient effects, floating elements
+   */
+  waveHarmonic: [0.37, 0, 0.63, 1] as EasingArray,
 } as const;
 
 /**
@@ -203,6 +244,51 @@ export const springs = {
     stiffness: 300,
     damping: 8,
     mass: 0.8
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SOUND WAVE SPRINGS
+  // Springs that feel like audio waveforms and resonance
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Wave gentle - like a low frequency wave
+   * Use for: Hero animations, large element reveals
+   */
+  waveGentle: {
+    stiffness: 80,
+    damping: 20,
+    mass: 1.2
+  },
+
+  /**
+   * Wave pulse - like a mid frequency pulse
+   * Use for: Stats, counters, rhythmic animations
+   */
+  wavePulse: {
+    stiffness: 180,
+    damping: 18,
+    mass: 0.8
+  },
+
+  /**
+   * Wave resonant - slight ring like audio resonance
+   * Use for: Interactive feedback, hover effects
+   */
+  waveResonant: {
+    stiffness: 250,
+    damping: 12,
+    mass: 0.6
+  },
+
+  /**
+   * Wave harmonic - smooth oscillating feel
+   * Use for: Floating elements, ambient animations
+   */
+  waveHarmonic: {
+    stiffness: 120,
+    damping: 16,
+    mass: 1
   },
 } as const;
 

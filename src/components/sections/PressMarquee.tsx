@@ -1,118 +1,76 @@
 /**
  * Press & Brand Marquee
  *
- * Infinite scrolling marquee showing:
- * - Press features (CNN, Forbes, Bloomberg, BBC)
- * - Brand collaborations (Ferrari, Maserati, Jacob & Co, Canon)
- *
- * Purpose: Build credibility immediately after hero
+ * Simplified infinite scrolling marquee (matching reference)
+ * Features:
+ * - Single row with larger text
+ * - Combined press & brand logos
+ * - Clean, minimal design
  */
 
 import { motion } from 'framer-motion';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// PRESS & BRAND DATA
+// COMBINED PRESS & BRAND DATA
 // ═══════════════════════════════════════════════════════════════════════════
 
-const pressLogos = [
+const featuredIn = [
   'CNN',
   'Forbes',
   'Bloomberg',
   'BBC',
-  'CNBC',
-  'CoinMarketCap',
-  'Gulf News',
-  'Arab News'
-];
-
-const brandLogos = [
+  'Canon',
   'Ferrari',
   'Maserati',
   'Jacob & Co',
-  'Canon',
-  'DIFC',
   'Art Dubai',
-  'Expo 2020',
+  'Nivea',
+  'CNBC',
   'Cartier'
 ];
-
-// ═══════════════════════════════════════════════════════════════════════════
-// MARQUEE ROW COMPONENT
-// ═══════════════════════════════════════════════════════════════════════════
-
-interface MarqueeRowProps {
-  items: string[];
-  direction?: 'left' | 'right';
-  speed?: number;
-  label: string;
-}
-
-function MarqueeRow({ items, direction = 'left', speed = 30, label }: MarqueeRowProps) {
-  // Double items for seamless loop
-  const doubledItems = [...items, ...items];
-
-  return (
-    <div className="relative overflow-hidden py-4">
-      {/* Label */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-luxury-black pr-4">
-        <span className="text-xs text-white/30 uppercase tracking-[0.15em]">{label}</span>
-      </div>
-
-      {/* Gradient masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-luxury-black to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-luxury-black to-transparent z-10 pointer-events-none" />
-
-      {/* Scrolling content */}
-      <motion.div
-        className="flex items-center gap-12 whitespace-nowrap"
-        animate={{
-          x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%']
-        }}
-        transition={{
-          duration: speed,
-          repeat: Infinity,
-          ease: 'linear'
-        }}
-      >
-        {doubledItems.map((item, index) => (
-          <span
-            key={`${item}-${index}`}
-            className="text-white/40 text-sm sm:text-base font-medium tracking-wide hover:text-gold-500 transition-colors duration-300 cursor-default"
-          >
-            {item}
-          </span>
-        ))}
-      </motion.div>
-    </div>
-  );
-}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PRESS MARQUEE MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
 
 export function PressMarquee() {
+  // Double items for seamless loop
+  const doubledItems = [...featuredIn, ...featuredIn];
+
   return (
-    <section className="relative py-8 sm:py-12 bg-luxury-black border-y border-white/5">
-      <div className="max-w-7xl mx-auto">
-        {/* Press row */}
-        <MarqueeRow
-          items={pressLogos}
-          direction="left"
-          speed={35}
-          label="Featured in"
-        />
+    <section className="py-16 border-y border-white/5 bg-luxury-black/50 backdrop-blur-sm">
+      <div className="container mx-auto px-4">
+        {/* Label */}
+        <p className="text-center text-xs tracking-[0.25em] uppercase text-white/40 mb-10">
+          As Featured In
+        </p>
 
-        {/* Divider */}
-        <div className="h-px bg-white/5 mx-16" />
+        {/* Marquee container */}
+        <div className="relative overflow-hidden">
+          {/* Gradient masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-luxury-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-luxury-black to-transparent z-10 pointer-events-none" />
 
-        {/* Brands row */}
-        <MarqueeRow
-          items={brandLogos}
-          direction="right"
-          speed={40}
-          label="Partnered with"
-        />
+          {/* Scrolling content */}
+          <motion.div
+            className="flex items-center gap-16 whitespace-nowrap"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              ease: 'linear'
+            }}
+          >
+            {doubledItems.map((item, index) => (
+              <span
+                key={`${item}-${index}`}
+                className="font-display text-xl tracking-wider text-white/40 hover:text-gold-500 transition-colors duration-300 cursor-default"
+              >
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

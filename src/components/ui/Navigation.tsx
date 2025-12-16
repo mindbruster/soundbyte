@@ -26,10 +26,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { href: '/', label: 'Home', isRoute: true },
   { href: '/soundbyte', label: 'SoundBYTE Originals™', isRoute: true },
   { href: '/sonic-identity', label: 'Sonic Identity™', isRoute: true },
   { href: '/portfolio', label: 'Collections', isRoute: true },
-  { href: '/about', label: 'About', isRoute: true }
+  { href: '/about', label: 'About', isRoute: true },
+  { href: '/contact', label: 'Contact', isRoute: true }
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════

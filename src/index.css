@@ -75,6 +75,111 @@
     border-image: linear-gradient(90deg, var(--color-gold-400), var(--color-gold-600)) 1;
   }
 
+  /* Link underline animation */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-gold-500);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .link-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Wave pulse animation */
+  .animate-pulse-glow {
+    animation: pulse-glow 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
+    }
+    50% {
+      filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5));
+    }
+  }
+
+  /* Fade in animations */
+  .animate-fade-in {
+    animation: fade-in 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation: fade-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.2s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: fade-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.4s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation: fade-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.6s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll-triggered marquee */
+  .animate-scroll-left {
+    animation: scroll-left 30s linear infinite;
+  }
+
+  @keyframes scroll-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Editorial line animation */
+  .editorial-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);
+    margin: 0 auto;
+  }
+
+  /* Letter spacing utilities */
+  .tracking-widest-xl {
+    letter-spacing: 0.25em;
+  }
+
   /* Typography utilities */
   .font-display {
     font-family: var(--font-display);
