@@ -1,69 +1,44 @@
 /**
  * Home Page
  *
- * Focus: Amrita (the artist) + Her Art (for sale)
- *
- * Flow (matching reference site):
- * 1. Hero - First impression, authority stats, CTAs
- * 2. Press Marquee - Credibility (CNN, Forbes, Ferrari, etc.)
- * 3. Featured Exhibition - Art Dubai 2026 highlight
- * 4. Signature Style - SoundBYTEs explanation
- * 5. Signature Works - Notable projects
- * 6. Philosophy - Art + Innovation, Identity + Story, Emotional Impact
- * 7. Choose Your Experience - SoundBYTE, Sonic Identity, BYTEclub
- * 8. Achievements - Record-breaking milestones
- * 9. Portfolio - Collections preview
- * 10. BYTEclub CTA - Newsletter signup
+ * Restructured Flow:
+ * 1. Hero (Two Column) - Left: Introduction / Right: Who is Amrita
+ * 2. Her Artworks - Art systems and collections
+ * 3. Her Exhibitions - Exhibitions and public art
+ * 4. SoundBYTE - Introduction → Commission page
+ * 5. Sonic Identity - Introduction → Sonic Identity page
+ * 6. BYTEclub - Community signup
+ * 7. Footer (in layout)
  */
 
 import {
   HeroSection,
-  PressMarquee,
-  FeaturedExhibitionSection,
+  ArtCollectionsSection,
+  ExhibitionsSection,
   SoundByteSection,
-  SignatureWorksSection,
-  PhilosophySection,
-  VoiceDemoSection,
-  ExperienceSection,
-  AchievementsSection,
-  PortfolioSection,
+  SonicIdentitySection,
   ByteclubSection
 } from '../components/sections';
 
 export function HomePage() {
   return (
     <>
-      {/* Hero - Amrita + Authority */}
+      {/* 1. Hero (Two Column) - Left: Intro / Right: Who is Amrita */}
       <HeroSection />
 
-      {/* Press & Brand Marquee - Credibility */}
-      <PressMarquee />
+      {/* 2. Her Artworks - Art systems and collections */}
+      <ArtCollectionsSection />
 
-      {/* Featured Exhibition - Art Dubai 2026 */}
-      <FeaturedExhibitionSection />
+      {/* 3. Her Exhibitions - Exhibitions and public art */}
+      <ExhibitionsSection />
 
-      {/* Signature Style - What is a SoundBYTE */}
+      {/* 4. SoundBYTE - Introduction → Commission */}
       <SoundByteSection />
 
-      {/* Signature Works - Notable projects */}
-      <SignatureWorksSection />
+      {/* 5. Sonic Identity - Introduction → Sonic Identity page */}
+      <SonicIdentitySection />
 
-      {/* Philosophy - Three pillars */}
-      <PhilosophySection />
-
-      {/* Interactive Voice Demo - Try it yourself! */}
-      <VoiceDemoSection />
-
-      {/* Choose Your Experience - Product pathways */}
-      <ExperienceSection />
-
-      {/* Achievements - Milestones */}
-      <AchievementsSection />
-
-      {/* Portfolio - Collections preview */}
-      <PortfolioSection />
-
-      {/* BYTEclub CTA - Newsletter */}
+      {/* 6. BYTEclub - Community */}
       <ByteclubSection />
     </>
   );

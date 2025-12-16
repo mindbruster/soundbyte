@@ -40,7 +40,7 @@ interface WaveformVisualizerProps {
 
 function WaveformVisualizer({ analyser, isRecording }: WaveformVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -302,7 +302,7 @@ export function VoiceDemoSection() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const MAX_DURATION = 3; // seconds
 

@@ -3,6 +3,9 @@
  */
 
 export { HeroSection } from './HeroSection';
+export { IntroSection } from './IntroSection';
+export { ArtCollectionsSection } from './ArtCollectionsSection';
+export { ExhibitionsSection } from './ExhibitionsSection';
 export { PressMarquee } from './PressMarquee';
 export { FeaturedExhibitionSection } from './FeaturedExhibitionSection';
 export { SignatureWorksSection } from './SignatureWorksSection';
