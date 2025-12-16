@@ -93,7 +93,7 @@ function ArtworkCard({ artwork, index, onClick }: ArtworkCardProps) {
         style={{
           background: useTransform(
             [glowX, glowY],
-            ([x, y]) => `radial-gradient(circle at ${x}% ${y}%, rgba(212, 168, 83, 0.4) 0%, transparent 50%)`
+            ([x, y]) => `radial-gradient(circle at ${x}% ${y}%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)`
           ),
         }}
       />
@@ -256,8 +256,8 @@ function ArtworkCard({ artwork, index, onClick }: ArtworkCardProps) {
         className="absolute inset-0 rounded-2xl pointer-events-none"
         animate={{
           boxShadow: isHovered
-            ? '0 0 30px rgba(212, 168, 83, 0.3), inset 0 0 30px rgba(212, 168, 83, 0.1)'
-            : '0 0 0px rgba(212, 168, 83, 0), inset 0 0 0px rgba(212, 168, 83, 0)',
+            ? '0 0 30px rgba(16, 185, 129, 0.3), inset 0 0 30px rgba(16, 185, 129, 0.1)'
+            : '0 0 0px rgba(16, 185, 129, 0), inset 0 0 0px rgba(16, 185, 129, 0)',
         }}
         transition={{ duration: 0.5 }}
       />

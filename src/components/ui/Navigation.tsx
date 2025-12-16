@@ -9,12 +9,11 @@
  * - Active route indicator
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './Button';
 import { cn } from '../../lib/utils';
-import { springs, durations } from '../../lib/animations';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // TYPES
@@ -27,14 +26,14 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: '/about', label: 'About', isRoute: true },
-  { href: '/portfolio', label: 'Portfolio', isRoute: true },
-  { href: '/soundbyte', label: 'SoundBYTE', isRoute: true },
-  { href: '/sonic-identity', label: 'Sonic Identity', isRoute: true }
+  { href: '/soundbyte', label: 'SoundBYTE Originals™', isRoute: true },
+  { href: '/sonic-identity', label: 'Sonic Identity™', isRoute: true },
+  { href: '/portfolio', label: 'Collections', isRoute: true },
+  { href: '/about', label: 'About', isRoute: true }
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════
-// NAV LINK COMPONENT WITH MAGNETIC EFFECT
+// NAV LINK COMPONENT - Clean & Minimal
 // ═══════════════════════════════════════════════════════════════════════════
 
 interface NavLinkProps {
@@ -46,116 +45,51 @@ interface NavLinkProps {
 }
 
 function NavLink({ href, children, isActive, onClick, isRoute }: NavLinkProps) {
-  const linkRef = useRef<HTMLDivElement>(null);
-
-  // Motion values for magnetic effect
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Spring physics for smooth movement
-  const xSpring = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
-  const ySpring = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
-
-  useEffect(() => {
-    const link = linkRef.current;
-    if (!link) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = link.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-      const radius = 80;
-      if (distance < radius) {
-        const strength = (1 - distance / radius) * 0.4;
-        x.set(deltaX * strength);
-        y.set(deltaY * strength);
-      } else {
-        x.set(0);
-        y.set(0);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      x.set(0);
-      y.set(0);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    link.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      link.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [x, y]);
-
   const linkContent = (
-    <>
+    <span className="relative">
       {children}
-      {isActive && (
-        <motion.div
-          layoutId="activeIndicator"
-          className="absolute -bottom-1 left-0 right-0 h-px bg-gold-500"
-          transition={{ type: 'spring', ...springs.snappy }}
-        />
-      )}
-    </>
+      <span
+        className={cn(
+          'absolute -bottom-1 left-0 h-px bg-gold-500 transition-all duration-300',
+          isActive ? 'w-full' : 'w-0 group-hover:w-full'
+        )}
+      />
+    </span>
   );
 
   if (isRoute) {
     return (
-      <motion.div
-        ref={linkRef}
-        style={{ x: xSpring, y: ySpring }}
-        className="inline-block"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <Link
-          to={href}
-          onClick={onClick}
-          className={cn(
-            'relative text-sm font-medium transition-colors duration-300 inline-block',
-            isActive ? 'text-gold-500' : 'text-white/70 hover:text-white'
-          )}
-        >
-          {linkContent}
-        </Link>
-      </motion.div>
-    );
-  }
-
-  return (
-    <motion.div
-      ref={linkRef}
-      style={{ x: xSpring, y: ySpring }}
-      className="inline-block"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <a
-        href={href}
-        onClick={(e) => {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-          onClick?.();
-        }}
+      <Link
+        to={href}
+        onClick={onClick}
         className={cn(
-          'relative text-sm font-medium transition-colors duration-300 inline-block',
+          'group relative text-sm font-medium transition-colors duration-300',
           isActive ? 'text-gold-500' : 'text-white/70 hover:text-white'
         )}
       >
         {linkContent}
-      </a>
-    </motion.div>
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      onClick={(e) => {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+        onClick?.();
+      }}
+      className={cn(
+        'group relative text-sm font-medium transition-colors duration-300',
+        isActive ? 'text-gold-500' : 'text-white/70 hover:text-white'
+      )}
+    >
+      {linkContent}
+    </a>
   );
 }
 
@@ -188,7 +122,7 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'spring', ...springs.smooth }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-luxury-charcoal border-l border-white/10 z-50 p-8"
           >
             {/* Close button */}
@@ -204,7 +138,7 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
             {/* Logo */}
             <div className="mb-12">
               <Link to="/" onClick={onClose} className="font-display text-2xl text-white font-bold">
-                Amrita <span className="text-gradient-gold">Sethi</span>
+                amrita <span className="text-gradient-gold">sethi</span>
               </Link>
             </div>
 
@@ -244,76 +178,17 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// MAGNETIC LOGO COMPONENT
+// LOGO COMPONENT - Clean & Simple
 // ═══════════════════════════════════════════════════════════════════════════
 
-function MagneticLogo() {
-  const logoRef = useRef<HTMLDivElement>(null);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotate = useMotionValue(0);
-
-  const xSpring = useSpring(x, { stiffness: 100, damping: 12, mass: 0.2 });
-  const ySpring = useSpring(y, { stiffness: 100, damping: 12, mass: 0.2 });
-  const rotateSpring = useSpring(rotate, { stiffness: 100, damping: 15 });
-
-  useEffect(() => {
-    const logo = logoRef.current;
-    if (!logo) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = logo.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-      const radius = 120;
-      if (distance < radius) {
-        const strength = (1 - distance / radius) * 0.5;
-        x.set(deltaX * strength);
-        y.set(deltaY * strength);
-        rotate.set(deltaX * strength * 0.1);
-      } else {
-        x.set(0);
-        y.set(0);
-        rotate.set(0);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      x.set(0);
-      y.set(0);
-      rotate.set(0);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    logo.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      logo.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [x, y, rotate]);
-
+function Logo() {
   return (
-    <motion.div
-      ref={logoRef}
-      style={{ x: xSpring, y: ySpring, rotate: rotateSpring }}
-      className="inline-block"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
+    <Link
+      to="/"
+      className="font-display text-xl sm:text-2xl text-white font-semibold tracking-tight hover:opacity-80 transition-opacity duration-300"
     >
-      <Link
-        to="/"
-        className="font-display text-xl sm:text-2xl text-white font-bold inline-block"
-      >
-        Amrita <span className="text-gradient-gold">Sethi</span>
-      </Link>
-    </motion.div>
+      amrita <span className="text-gold-500">sethi</span>
+    </Link>
   );
 }
 
@@ -352,9 +227,9 @@ export function Navigation() {
   return (
     <>
       <motion.header
-        initial={{ y: -100, opacity: 0 }}
+        initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: durations.smooth, delay: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           isScrolled
@@ -364,8 +239,8 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo with magnetic effect */}
-            <MagneticLogo />
+            {/* Logo */}
+            <Logo />
 
             {/* Desktop navigation */}
             <nav className="hidden md:flex items-center gap-8">

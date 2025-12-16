@@ -256,7 +256,7 @@ export function AboutPage() {
         <ScrollReveal direction="up" className="text-center mb-20">
           <Label variant="gold" className="mb-4">The Artist</Label>
           <Heading as="h1" size="hero" align="center" className="mb-8">
-            Amrita <span className="text-gradient-gold">Sethi</span>
+            amrita <span className="text-gradient-gold">sethi</span>
           </Heading>
 
           {/* Profile image */}
@@ -309,7 +309,7 @@ export function AboutPage() {
               </h2>
               <div className="space-y-4 text-white/70 leading-relaxed">
                 <p>
-                  Amrita Sethi is a pioneering sound artist who transforms voice and sound into
+                  amrita sethi is a pioneering sound artist who transforms voice and sound into
                   stunning visual masterpieces. Based in Dubai, she has revolutionized the art
                   world by creating an entirely new medium — the SoundBYTE® — which captures
                   the unique frequency patterns of human voice and translates them into

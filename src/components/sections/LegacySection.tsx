@@ -220,7 +220,7 @@ function PressLogo({ publication }: PressLogoProps) {
       <motion.span
         className="font-display text-xl sm:text-2xl font-medium tracking-wide cursor-default relative"
         animate={{
-          color: isHovered ? '#d4a853' : 'rgba(255,255,255,0.35)',
+          color: isHovered ? '#10b981' : 'rgba(255,255,255,0.35)',
         }}
         transition={{ duration: 0.3 }}
       >
@@ -296,7 +296,7 @@ export function LegacySection() {
         <ScrollReveal direction="up" className="text-center mb-16 sm:mb-20">
           <Label variant="gold" className="mb-4">Record-Breaking. Industry-Defining. Globally Recognized.</Label>
           <Heading as="h2" size="title" align="center" className="mb-6">
-            Why <span className="text-gradient-gold">Amrita</span> Matters
+            Why <span className="text-gradient-gold">amrita</span> Matters
           </Heading>
 
           {/* Artist Profile Image */}

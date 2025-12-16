@@ -427,7 +427,7 @@ function ProgressWave({ progress, currentSection, totalSections }: ProgressWaveP
 
     // Background wave (inactive)
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(212, 168, 83, 0.15)';
+    ctx.strokeStyle = 'rgba(16, 185, 129, 0.15)';
     ctx.lineWidth = 2;
 
     for (let x = 0; x <= width; x += 2) {
@@ -440,9 +440,9 @@ function ProgressWave({ progress, currentSection, totalSections }: ProgressWaveP
     // Active wave (filled progress)
     if (progress > 0) {
       ctx.beginPath();
-      ctx.strokeStyle = '#d4a853';
+      ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 3;
-      ctx.shadowColor = '#d4a853';
+      ctx.shadowColor = '#10b981';
       ctx.shadowBlur = 10;
 
       for (let x = 0; x <= activeWidth; x += 2) {
@@ -462,13 +462,13 @@ function ProgressWave({ progress, currentSection, totalSections }: ProgressWaveP
 
       ctx.beginPath();
       ctx.arc(x, centerY, isCurrent ? 8 : 5, 0, Math.PI * 2);
-      ctx.fillStyle = isCompleted ? '#d4a853' : isCurrent ? '#e5c158' : 'rgba(212, 168, 83, 0.3)';
+      ctx.fillStyle = isCompleted ? '#10b981' : isCurrent ? '#34d399' : 'rgba(16, 185, 129, 0.3)';
       ctx.fill();
 
       if (isCurrent) {
         ctx.beginPath();
         ctx.arc(x, centerY, 12, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(212, 168, 83, 0.5)';
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.5)';
         ctx.lineWidth = 2;
         ctx.stroke();
       }
@@ -669,8 +669,8 @@ function AnimatedInput({ question, value, onChange, index }: AnimatedInputProps)
 
       <motion.div
         animate={{
-          borderColor: isFocused ? 'rgba(212, 168, 83, 0.6)' : 'rgba(255, 255, 255, 0.1)',
-          boxShadow: isFocused ? '0 0 30px rgba(212, 168, 83, 0.1)' : 'none'
+          borderColor: isFocused ? 'rgba(16, 185, 129, 0.6)' : 'rgba(255, 255, 255, 0.1)',
+          boxShadow: isFocused ? '0 0 30px rgba(16, 185, 129, 0.1)' : 'none'
         }}
         className="relative rounded-xl border bg-white/5 backdrop-blur-sm overflow-hidden"
       >

@@ -60,7 +60,7 @@ export function FluidCursor({ enableTrail = true, trailLength = 12 }: FluidCurso
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [hoverText, setHoverText] = useState<string | null>(null);
+  const [_hoverText, setHoverText] = useState<string | null>(null);
 
   // Motion values for smooth cursor
   const cursorX = useMotionValue(0);
@@ -71,11 +71,7 @@ export function FluidCursor({ enableTrail = true, trailLength = 12 }: FluidCurso
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
-  // Slower spring for the outer ring
-  const outerSpringConfig = { stiffness: 150, damping: 20, mass: 1 };
-  const outerXSpring = useSpring(cursorX, outerSpringConfig);
-  const outerYSpring = useSpring(cursorY, outerSpringConfig);
-
+  
   // Trail particles
   const [trailParticles, setTrailParticles] = useState<TrailParticle[]>([]);
   const particleIdRef = useRef(0);
@@ -210,73 +206,32 @@ export function FluidCursor({ enableTrail = true, trailLength = 12 }: FluidCurso
       {/* Trail particles */}
       {enableTrail && <CursorTrail particles={trailParticles} />}
 
-      {/* Main cursor */}
+      {/* Main cursor - simple dot */}
       <AnimatePresence>
         {isVisible && (
-          <>
-            {/* Inner dot */}
+          <motion.div
+            className="pointer-events-none fixed z-[9999]"
+            style={{
+              x: cursorXSpring,
+              y: cursorYSpring
+            }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: 1,
+              scale: isClicking ? 0.8 : 1
+            }}
+            exit={{ opacity: 0, scale: 0 }}
+          >
             <motion.div
-              className="pointer-events-none fixed z-[9999] mix-blend-difference"
-              style={{
-                x: cursorXSpring,
-                y: cursorYSpring
-              }}
-              initial={{ opacity: 0, scale: 0 }}
+              className="relative -translate-x-1/2 -translate-y-1/2 rounded-full"
               animate={{
-                opacity: 1,
-                scale: isClicking ? 0.8 : 1
+                width: isHovering ? 16 : 10,
+                height: isHovering ? 16 : 10,
+                backgroundColor: isHovering ? 'rgb(212, 168, 83)' : 'rgb(255, 255, 255)'
               }}
-              exit={{ opacity: 0, scale: 0 }}
-            >
-              <motion.div
-                className="relative -translate-x-1/2 -translate-y-1/2"
-                animate={{
-                  width: isHovering ? 12 : 8,
-                  height: isHovering ? 12 : 8
-                }}
-                transition={{ type: 'spring', ...springs.snappy }}
-              >
-                <div className="w-full h-full rounded-full bg-white" />
-              </motion.div>
-            </motion.div>
-
-            {/* Outer ring */}
-            <motion.div
-              className="pointer-events-none fixed z-[9998]"
-              style={{
-                x: outerXSpring,
-                y: outerYSpring
-              }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-            >
-              <motion.div
-                className="relative -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
-                animate={{
-                  width: isHovering ? 60 : 40,
-                  height: isHovering ? 60 : 40,
-                  borderColor: isHovering ? 'rgba(212, 168, 83, 0.8)' : 'rgba(255, 255, 255, 0.3)',
-                  backgroundColor: isHovering ? 'rgba(212, 168, 83, 0.1)' : 'transparent'
-                }}
-                transition={{ type: 'spring', ...springs.smooth }}
-              />
-
-              {/* Hover text */}
-              <AnimatePresence>
-                {hoverText && (
-                  <motion.span
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-xs text-gold-500 font-medium whitespace-nowrap"
-                  >
-                    {hoverText}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </>
+              transition={{ type: 'spring', ...springs.snappy }}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
     </>

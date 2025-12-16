@@ -194,7 +194,7 @@ function AwardCard({ title, description, year, index, image }: AwardCardProps) {
       <motion.div
         className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"
         style={{
-          background: 'radial-gradient(circle, rgba(212, 168, 83, 0.3) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%)',
         }}
         animate={isHovered ? { scale: [1, 1.1, 1] } : { scale: 1 }}
         transition={{ duration: 2, repeat: isHovered ? Infinity : 0 }}
@@ -279,7 +279,7 @@ function AwardCard({ title, description, year, index, image }: AwardCardProps) {
         <motion.div
           className="absolute bottom-0 left-6 right-6 h-px"
           style={{
-            background: 'linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.5), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent)',
           }}
           initial={{ scaleX: 0 }}
           animate={isHovered ? { scaleX: 1 } : { scaleX: 0 }}
@@ -354,14 +354,14 @@ export function AwardsSection() {
           <motion.div
             className="relative p-8 sm:p-12 rounded-3xl overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(212, 168, 83, 0.02) 100%)',
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.02) 100%)',
             }}
           >
             {/* Animated border */}
             <motion.div
               className="absolute inset-0 rounded-3xl"
               style={{
-                background: 'linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.5), transparent)',
+                background: 'linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent)',
                 backgroundSize: '200% 100%',
               }}
               animate={{

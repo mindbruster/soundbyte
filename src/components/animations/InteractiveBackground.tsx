@@ -27,50 +27,50 @@ interface SectionColorConfig {
 const SECTION_CONFIGS: Record<string, SectionColorConfig> = {
   hero: {
     primary: new THREE.Color(0x0a0a0a),
-    secondary: new THREE.Color(0x1a1510),
-    accent: new THREE.Color(0xd4a853),
+    secondary: new THREE.Color(0x0a140f),
+    accent: new THREE.Color(0x10b981), // Emerald
     particleOpacity: 0.6,
     waveIntensity: 1.0
   },
   legacy: {
     primary: new THREE.Color(0x0d0d0d),
-    secondary: new THREE.Color(0x1f1a14),
-    accent: new THREE.Color(0xc9a227),
+    secondary: new THREE.Color(0x0a140f),
+    accent: new THREE.Color(0x059669), // Emerald darker
     particleOpacity: 0.5,
     waveIntensity: 0.8
   },
   portfolio: {
     primary: new THREE.Color(0x080808),
-    secondary: new THREE.Color(0x151210),
-    accent: new THREE.Color(0xe5c158),
+    secondary: new THREE.Color(0x08120d),
+    accent: new THREE.Color(0x34d399), // Emerald lighter
     particleOpacity: 0.7,
     waveIntensity: 1.2
   },
   soundbyte: {
     primary: new THREE.Color(0x0c0c0c),
-    secondary: new THREE.Color(0x1a1612),
-    accent: new THREE.Color(0xd4a853),
+    secondary: new THREE.Color(0x0a140f),
+    accent: new THREE.Color(0x10b981), // Emerald
     particleOpacity: 0.8,
     waveIntensity: 1.5
   },
   sonic: {
     primary: new THREE.Color(0x0a0908),
-    secondary: new THREE.Color(0x181410),
-    accent: new THREE.Color(0xb8941e),
+    secondary: new THREE.Color(0x0a120d),
+    accent: new THREE.Color(0x047857), // Emerald darkest
     particleOpacity: 0.6,
     waveIntensity: 1.0
   },
   commission: {
     primary: new THREE.Color(0x0d0b0a),
-    secondary: new THREE.Color(0x1c1814),
-    accent: new THREE.Color(0xddb44a),
+    secondary: new THREE.Color(0x0c1610),
+    accent: new THREE.Color(0x6ee7b7), // Emerald lightest
     particleOpacity: 0.7,
     waveIntensity: 0.9
   },
   footer: {
     primary: new THREE.Color(0x050505),
-    secondary: new THREE.Color(0x0f0d0b),
-    accent: new THREE.Color(0xc9a227),
+    secondary: new THREE.Color(0x060a08),
+    accent: new THREE.Color(0x059669), // Emerald darker
     particleOpacity: 0.4,
     waveIntensity: 0.5
   }
@@ -501,7 +501,7 @@ function ParticleSystem({ scrollProgress, currentSection, count = 300 }: Particl
       <pointsMaterial
         ref={materialRef}
         size={0.05}
-        color="#d4a853"
+        color="#10b981"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -624,8 +624,8 @@ function SoundWaveBars({ scrollProgress, currentSection, count = 64 }: SoundWave
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial
           ref={materialRef}
-          color="#d4a853"
-          emissive="#d4a853"
+          color="#10b981"
+          emissive="#10b981"
           emissiveIntensity={0.3}
           metalness={0.8}
           roughness={0.2}
@@ -655,8 +655,8 @@ function SceneContent({ scrollProgress, currentSection, sectionProgress }: Scene
     <>
       {/* Ambient lighting - dimmer in hero */}
       <ambientLight intensity={isHero ? 0.1 : 0.2} />
-      <pointLight position={[10, 10, 10]} intensity={isHero ? 0.3 : 0.8} color="#d4a853" />
-      <pointLight position={[-10, -10, 5]} intensity={isHero ? 0.2 : 0.4} color="#c9a227" />
+      <pointLight position={[10, 10, 10]} intensity={isHero ? 0.3 : 0.8} color="#10b981" />
+      <pointLight position={[-10, -10, 5]} intensity={isHero ? 0.2 : 0.4} color="#059669" />
 
       {/* Interactive wave mesh - subtle in hero */}
       <WaveMesh

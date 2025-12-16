@@ -20,42 +20,42 @@ export interface SectionColors {
   accent: string;
 }
 
-// Section color schemes for the background
+// Section color schemes for the background (Emerald Green theme)
 export const SECTION_THEMES: Record<string, SectionColors> = {
   hero: {
     primary: '#0a0a0a',
-    secondary: '#1a1510',
-    accent: '#d4a853'
+    secondary: '#0a140f',
+    accent: '#10b981'
   },
   legacy: {
     primary: '#0d0d0d',
-    secondary: '#1f1a14',
-    accent: '#c9a227'
+    secondary: '#0a140f',
+    accent: '#059669'
   },
   portfolio: {
     primary: '#080808',
-    secondary: '#151210',
-    accent: '#e5c158'
+    secondary: '#08120d',
+    accent: '#34d399'
   },
   soundbyte: {
     primary: '#0c0c0c',
-    secondary: '#1a1612',
-    accent: '#d4a853'
+    secondary: '#0a140f',
+    accent: '#10b981'
   },
   sonic: {
     primary: '#0a0908',
-    secondary: '#181410',
-    accent: '#b8941e'
+    secondary: '#0a120d',
+    accent: '#047857'
   },
   commission: {
     primary: '#0d0b0a',
-    secondary: '#1c1814',
-    accent: '#ddb44a'
+    secondary: '#0c1610',
+    accent: '#6ee7b7'
   },
   footer: {
     primary: '#050505',
-    secondary: '#0f0d0b',
-    accent: '#c9a227'
+    secondary: '#060a08',
+    accent: '#059669'
   }
 };
 

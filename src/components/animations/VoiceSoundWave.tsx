@@ -17,33 +17,6 @@ import { useRef, useEffect, useCallback, useState } from 'react';
 import { useMotionValue, useSpring } from 'framer-motion';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// MATHEMATICAL WAVE FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════════════
-
-// Perlin-like noise for organic variation
-function smoothNoise(x: number, seed: number = 0): number {
-  const n = Math.sin(x * 12.9898 + seed * 78.233) * 43758.5453;
-  return n - Math.floor(n);
-}
-
-// Multi-octave noise for complex patterns
-function fractalNoise(x: number, octaves: number = 4, persistence: number = 0.5): number {
-  let total = 0;
-  let frequency = 1;
-  let amplitude = 1;
-  let maxValue = 0;
-
-  for (let i = 0; i < octaves; i++) {
-    total += smoothNoise(x * frequency, i) * amplitude;
-    maxValue += amplitude;
-    amplitude *= persistence;
-    frequency *= 2;
-  }
-
-  return total / maxValue;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
 // WAVE LAYER CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -59,70 +32,26 @@ interface WaveLayer {
 }
 
 const waveLayers: WaveLayer[] = [
-  // Background glow layer - deep bass, like a powerful voice resonating
-  {
-    amplitude: 120,
-    frequency: 0.003,
-    speed: 0.15,
-    phase: 0,
-    opacity: 0.2,
-    strokeWidth: 60,
-    color: '#d4a853',
-    glow: true
-  },
-  // Deep rumble layer - very low frequency, slow powerful movement
+  // Main voice wave - high amplitude, small wavelength
   {
     amplitude: 100,
-    frequency: 0.004,
-    speed: 0.2,
-    phase: Math.PI / 4,
-    opacity: 0.35,
-    strokeWidth: 5,
-    color: '#c9a227',
-    glow: false
-  },
-  // Main voice layer - dominant low pitch with power
-  {
-    amplitude: 85,
-    frequency: 0.006,
-    speed: 0.25,
-    phase: Math.PI / 2,
-    opacity: 0.6,
-    strokeWidth: 4,
-    color: '#d4a853',
-    glow: false
-  },
-  // Primary shouting layer - aggressive, punchy
-  {
-    amplitude: 70,
-    frequency: 0.008,
-    speed: 0.35,
+    frequency: 0.04,
+    speed: 0.5,
     phase: 0,
     opacity: 0.9,
-    strokeWidth: 4,
-    color: '#e5c158',
+    strokeWidth: 3,
+    color: '#10b981', // Emerald primary
     glow: true
   },
-  // Mid harmonic - adds body to the shout
+  // Secondary wave - follows the main wave
   {
-    amplitude: 45,
-    frequency: 0.012,
+    amplitude: 70,
+    frequency: 0.04,
     speed: 0.5,
-    phase: Math.PI / 3,
-    opacity: 0.7,
-    strokeWidth: 2.5,
-    color: '#f0d78c',
-    glow: false
-  },
-  // High detail layer - the edge/intensity of a shout
-  {
-    amplitude: 25,
-    frequency: 0.02,
-    speed: 0.8,
     phase: Math.PI / 6,
     opacity: 0.5,
-    strokeWidth: 1.5,
-    color: '#fff8e7',
+    strokeWidth: 2,
+    color: '#34d399', // Emerald lighter
     glow: false
   }
 ];
@@ -160,72 +89,47 @@ export function VoiceSoundWave({ className = '' }: VoiceSoundWaveProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Breathing pulse animation - more dramatic like shouting intensity
+  // Gentle breathing pulse - like natural speaking rhythm
   useEffect(() => {
     let pulseTime = 0;
     const pulseTick = () => {
-      pulseTime += 0.015; // Slower for more powerful feel
-      // Multiple pulse frequencies for complex breathing like shouting
-      const mainPulse = Math.sin(pulseTime) * 0.15;
-      const powerSurge = Math.pow(Math.sin(pulseTime * 0.5), 2) * 0.1;
-      const shoutIntensity = Math.sin(pulseTime * 2) * 0.05;
-      setPulse(1 + mainPulse + powerSurge + shoutIntensity);
+      pulseTime += 0.02;
+      // Gentle pulse like natural breathing while speaking
+      const breathPulse = Math.sin(pulseTime) * 0.08;
+      setPulse(1 + breathPulse);
       requestAnimationFrame(pulseTick);
     };
     const rafId = requestAnimationFrame(pulseTick);
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // Generate wave path with physics - SHOUTING VOICE dynamics
+  // Generate wave path - symmetrical wave with equal crest and trough
   const generateWavePath = useCallback((
     ctx: CanvasRenderingContext2D,
     width: number,
     height: number,
     layer: WaveLayer,
     time: number,
-    mouseXVal: number,
-    mouseYVal: number,
+    _mouseXVal: number,
+    _mouseYVal: number,
     pulseVal: number
   ) => {
     const centerY = height / 2;
     const points: { x: number; y: number }[] = [];
 
     // Generate points along the wave
-    for (let x = 0; x <= width; x += 2) {
+    for (let x = 0; x <= width; x += 4) {
       const normalizedX = x / width;
 
-      // Base sine wave - LOW frequency for deep voice
+      // Pure sine wave - perfectly symmetrical crest and trough
       const baseWave = Math.sin(x * layer.frequency + time * layer.speed + layer.phase);
 
-      // Add LOW harmonics for deep, powerful voice
-      const harmonic2 = Math.sin(x * layer.frequency * 1.5 + time * layer.speed * 0.8) * 0.4;
-      const harmonic3 = Math.sin(x * layer.frequency * 2 + time * layer.speed * 0.5) * 0.25;
+      // Envelope - fade at edges for clean look
+      const envelope = Math.sin(normalizedX * Math.PI);
 
-      // Sub-bass rumble - very low frequency undertone
-      const subBass = Math.sin(x * layer.frequency * 0.5 + time * layer.speed * 0.3) * 0.3;
-
-      // Shouting bursts - periodic intensity spikes
-      const shoutBurst = Math.pow(Math.sin(time * 0.8 + normalizedX * Math.PI), 4) * 0.5;
-
-      // Aggressive attack transients - sharp peaks like vocal attacks
-      const attack = Math.sin(x * layer.frequency * 4 + time * layer.speed * 2) *
-                     Math.exp(-Math.pow((normalizedX - 0.5) * 3, 2)) * 0.2;
-
-      // Fractal noise for organic variation - more intense
-      const noise = fractalNoise(x * 0.008 + time * 0.08, 5, 0.65) * 0.35;
-
-      // Envelope - fade at edges but maintain power in center
-      const envelope = Math.pow(Math.sin(normalizedX * Math.PI), 0.7);
-
-      // Mouse influence - creates a bulge/dip near cursor (more dramatic)
-      const mouseDistX = Math.abs(normalizedX - mouseXVal);
-      const mouseInfluence = Math.exp(-mouseDistX * mouseDistX * 15) * (mouseYVal - 0.5) * 150;
-
-      // Combine all effects with shouting intensity
-      const amplitude = layer.amplitude * envelope * pulseVal * (1 + shoutBurst);
-      const y = centerY +
-        (baseWave + harmonic2 + harmonic3 + subBass + attack + noise) * amplitude +
-        mouseInfluence;
+      // High amplitude, symmetrical wave
+      const amplitude = layer.amplitude * envelope * pulseVal;
+      const y = centerY + baseWave * amplitude;
 
       points.push({ x, y });
     }
@@ -329,44 +233,37 @@ export function VoiceSoundWave({ className = '' }: VoiceSoundWaveProps) {
     };
   }, [generateWavePath, mouseXSpring, mouseYSpring, pulse]);
 
-  // Draw sparkle particles
+  // Draw minimal sparkle particles
   const drawParticles = (
     ctx: CanvasRenderingContext2D,
     width: number,
     height: number,
     time: number,
-    mouseXVal: number,
+    _mouseXVal: number,
     _mouseYVal: number,
     pulseVal: number
   ) => {
     const centerY = height / 2;
-    const particleCount = 30;
+    const particleCount = 8; // Reduced from 30
 
     for (let i = 0; i < particleCount; i++) {
       const x = (i / particleCount) * width;
       const normalizedX = x / width;
 
-      // Match the main wave position with mouse influence
-      const mouseDistX = Math.abs(normalizedX - mouseXVal);
-      const mouseInfluence = Math.exp(-mouseDistX * mouseDistX * 10) * 20;
-      const baseWave = Math.sin(x * 0.025 + time * 0.8);
+      const baseWave = Math.sin(x * 0.008 + time * 0.4);
       const envelope = Math.sin(normalizedX * Math.PI);
-      const amplitude = 35 * envelope * pulseVal;
-      const y = centerY + baseWave * amplitude + mouseInfluence;
+      const amplitude = 40 * envelope * pulseVal;
+      const y = centerY + baseWave * amplitude;
 
-      // Particle properties
-      const particlePhase = i * 0.5 + time * 2;
-      const particleSize = 2 + Math.sin(particlePhase) * 1.5;
-      const particleOpacity = 0.3 + Math.sin(particlePhase) * 0.3;
+      const particlePhase = i * 0.8 + time * 1.5;
+      const particleSize = 2;
+      const particleOpacity = 0.4 + Math.sin(particlePhase) * 0.2;
 
-      // Only show some particles at a time
-      if (Math.sin(particlePhase) > 0.5) {
+      if (Math.sin(particlePhase) > 0.6) {
         ctx.save();
         ctx.beginPath();
         ctx.arc(x, y, particleSize, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 248, 231, ${particleOpacity})`;
-        ctx.shadowColor = '#f0d78c';
-        ctx.shadowBlur = 10;
         ctx.fill();
         ctx.restore();
       }

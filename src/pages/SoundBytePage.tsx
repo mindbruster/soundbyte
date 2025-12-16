@@ -75,7 +75,7 @@ function FloatingArtworkPreview() {
       <motion.div
         className="absolute w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(212, 168, 83, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%)',
           y: floatYSpring,
         }}
         animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
@@ -109,7 +109,7 @@ function FloatingArtworkPreview() {
         <motion.div
           className="relative w-56 h-64 sm:w-72 sm:h-80 rounded-2xl overflow-hidden"
           style={{
-            boxShadow: '0 50px 100px -20px rgba(0,0,0,0.5), 0 30px 60px -30px rgba(212, 168, 83, 0.3)',
+            boxShadow: '0 50px 100px -20px rgba(0,0,0,0.5), 0 30px 60px -30px rgba(16, 185, 129, 0.3)',
           }}
         >
           <div className="absolute inset-0 rounded-2xl border-4 border-gold-500/60 z-20 pointer-events-none" />
@@ -119,9 +119,9 @@ function FloatingArtworkPreview() {
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
             <defs>
               <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#d4a853" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#b8941e" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#d4a853" stopOpacity="0.8" />
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#059669" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#10b981" stopOpacity="0.8" />
               </linearGradient>
             </defs>
             {Array.from({ length: 12 }).map((_, i) => (
@@ -206,7 +206,7 @@ function SizePricingCard({ name, unframed, framed, priceRange, notes, index, pop
           className="absolute inset-0 rounded-2xl pointer-events-none"
           animate={{
             boxShadow: isHovered
-              ? '0 25px 60px -15px rgba(212, 168, 83, 0.4)'
+              ? '0 25px 60px -15px rgba(16, 185, 129, 0.4)'
               : '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
           }}
           transition={{ duration: 0.5 }}
@@ -307,7 +307,7 @@ function ProcessStep({ number, title, description, icon, index }: ProcessStepPro
 
         <motion.h4
           className="font-display text-xl text-white font-semibold mb-3"
-          animate={{ color: isHovered ? '#d4a853' : '#ffffff' }}
+          animate={{ color: isHovered ? '#10b981' : '#ffffff' }}
           transition={{ duration: 0.3 }}
         >
           {title}
@@ -547,9 +547,9 @@ export function SoundBytePage() {
               className="absolute inset-0 rounded-3xl pointer-events-none"
               animate={{
                 boxShadow: [
-                  '0 0 30px rgba(212, 168, 83, 0.1)',
-                  '0 0 60px rgba(212, 168, 83, 0.2)',
-                  '0 0 30px rgba(212, 168, 83, 0.1)',
+                  '0 0 30px rgba(16, 185, 129, 0.1)',
+                  '0 0 60px rgba(16, 185, 129, 0.2)',
+                  '0 0 30px rgba(16, 185, 129, 0.1)',
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}

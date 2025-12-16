@@ -3,6 +3,7 @@
  */
 
 export { HeroSection } from './HeroSection';
+export { PressMarquee } from './PressMarquee';
 export { LegacySection } from './LegacySection';
 export { AwardsSection } from './AwardsSection';
 export { PortfolioSection } from './PortfolioSection';

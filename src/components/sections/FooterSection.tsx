@@ -167,7 +167,7 @@ export function FooterSection() {
           <div className="lg:col-span-2">
             <ScrollReveal direction="up">
               <Link to="/" className="font-display text-2xl text-white font-bold mb-4 block">
-                Amrita <span className="text-gradient-gold">Sethi</span>
+                amrita <span className="text-gradient-gold">sethi</span>
               </Link>
               <p className="text-white/60 text-sm mb-2">
                 Sound Artist • Inventor of SoundBYTEs® • Dubai's First NFT Artist
@@ -256,7 +256,7 @@ export function FooterSection() {
           <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-white/30 text-sm">
-                © {new Date().getFullYear()} Amrita Sethi. All rights reserved.
+                © {new Date().getFullYear()} amrita sethi. All rights reserved.
               </p>
               <p className="text-white/20 text-xs mt-1">
                 SoundBYTE® is a registered trademark.

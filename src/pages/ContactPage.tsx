@@ -271,7 +271,7 @@ export function ContactPage() {
                     href="https://linkedin.com/in/amritasethi"
                     icon={socialIcons.linkedin}
                     label="LinkedIn"
-                    handle="Amrita Sethi"
+                    handle="amrita sethi"
                   />
                 </div>
               </div>

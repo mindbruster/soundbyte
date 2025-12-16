@@ -7,7 +7,14 @@
       "Bash(npm install)",
       "Bash(npm run dev:*)",
       "Bash(npm install:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "WebFetch(domain:www.canva.com)",
+      "WebSearch",
+      "WebFetch(domain:minimal.gallery)",
+      "WebFetch(domain:www.framer.com)",
+      "WebFetch(domain:kijo.london)",
+      "WebFetch(domain:www.amrita.art)",
+      "WebFetch(domain:amrita-art.lovable.app)"
     ],
     "deny": [],
     "ask": []
