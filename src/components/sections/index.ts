@@ -19,6 +19,7 @@ export { AwardsSection } from './AwardsSection';
 export { PortfolioSection } from './PortfolioSection';
 export { SoundByteSection } from './SoundByteSection';
 export { SonicIdentitySection } from './SonicIdentitySection';
+export { SonicByteclubSection } from './SonicByteclubSection';
 export { CommissionSection } from './CommissionSection';
 export { CommissionQuestionnaire } from './CommissionQuestionnaire';
 export { FooterSection } from './FooterSection';

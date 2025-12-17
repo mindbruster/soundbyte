@@ -190,7 +190,7 @@ function SizePricingCard({ name, unframed, framed, priceRange, notes, index, pop
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 + 0.3, type: 'spring', stiffness: 200 }}
         >
-          <span className="px-4 py-1.5 bg-gold-500 text-luxury-black text-xs font-bold rounded-full uppercase tracking-wider shadow-lg shadow-gold-500/30">
+          <span className="px-1 py-1.5 bg-gold-500 text-luxury-black text-xs font-bold rounded-full uppercase tracking-wider shadow-lg shadow-gold-500/30">
             Most Popular
           </span>
         </motion.div>

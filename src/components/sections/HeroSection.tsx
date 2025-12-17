@@ -10,6 +10,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
+import { ArrowRight, Mic, Radio } from 'lucide-react';
 
 // Artworks and artist photos to cycle through
 const artworks = [
@@ -441,14 +442,7 @@ export function HeroSection() {
                 <Link to="/commission">
                   <Button variant="primary" size="lg" className="group">
                     <span>Commission Art</span>
-                    <svg
-                      className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
                 <Link to="/about">
@@ -500,19 +494,7 @@ export function HeroSection() {
         }`}
         title={micActive ? 'Microphone active - speak to interact' : 'Enable microphone to interact with the soundwave'}
       >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-          />
-        </svg>
+        <Mic className="w-6 h-6" />
       </motion.button>
 
       {/* Mic status indicator */}
@@ -522,7 +504,7 @@ export function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           className="absolute bottom-[104px] right-20 z-50 flex items-center gap-2"
         >
-          <span className="w-2 h-2 rounded-full bg-[#33cc80] animate-pulse" />
+          <Radio className="w-3 h-3 text-[#33cc80] animate-pulse" />
           <span className="text-[#33cc80] text-xs uppercase tracking-wider font-medium">Live</span>
         </motion.div>
       )}

@@ -29,6 +29,12 @@ import {
 } from '../data/achievements';
 import { springs, durations, staggers } from '../lib/animations';
 import { cn } from '../lib/utils';
+import {
+  ChevronLeft,
+  ArrowRight,
+  Calendar,
+  MapPin
+} from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,7 +127,8 @@ function ExhibitionCard({ name, venue, location, year, description }: Exhibition
         'transition-colors duration-500'
       )}
     >
-      <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20">
+      <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center gap-1.5">
+        <Calendar className="w-3 h-3 text-gold-500" />
         <span className="text-xs text-gold-500 font-medium">{year}</span>
       </div>
 
@@ -130,7 +137,10 @@ function ExhibitionCard({ name, venue, location, year, description }: Exhibition
           {name}
         </h4>
         <p className="text-gold-500/80 font-medium mb-1">{venue}</p>
-        <p className="text-white/40 text-sm mb-3">{location}</p>
+        <p className="text-white/40 text-sm mb-3 flex items-center gap-1.5">
+          <MapPin className="w-3 h-3" />
+          {location}
+        </p>
         {description && (
           <p className="text-white/60 text-sm leading-relaxed">{description}</p>
         )}
@@ -244,10 +254,8 @@ export function AboutPage() {
       <Container size="xl">
         {/* Back link */}
         <ScrollReveal direction="up" className="mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 text-gold-500 hover:text-gold-400 transition-colors">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+          <Link to="/" className="inline-flex items-center gap-2 text-gold-500 hover:text-gold-400 transition-colors group">
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Home
           </Link>
         </ScrollReveal>
@@ -486,8 +494,9 @@ export function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/commission">
-                <Button variant="primary" size="lg">
-                  Start Your Commission
+                <Button variant="primary" size="lg" className="group">
+                  <span>Start Your Commission</span>
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link to="/portfolio">

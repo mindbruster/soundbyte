@@ -14,6 +14,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './Button';
 import { cn } from '../../lib/utils';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // TYPES
@@ -132,9 +133,7 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
               onClick={onClose}
               className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
             >
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="w-5 h-5 text-white" />
             </button>
 
             {/* Logo */}
@@ -167,8 +166,9 @@ function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
             {/* CTA */}
             <div className="absolute bottom-8 left-8 right-8">
               <Link to="/commission" onClick={onClose}>
-                <Button variant="primary" fullWidth>
-                  Commission
+                <Button variant="primary" fullWidth className="group">
+                  <span>Commission</span>
+                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
             </div>
@@ -274,9 +274,7 @@ export function Navigation() {
                 className="md:hidden w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
                 aria-label="Open menu"
               >
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                <Menu className="w-5 h-5 text-white" />
               </button>
             </div>
           </div>

@@ -14,22 +14,44 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
+import {
+  Mic,
+  AudioWaveform,
+  Paintbrush,
+  Package,
+  ArrowRight,
+  Quote,
+  Clock,
+  MessageSquare,
+  type LucideIcon
+} from 'lucide-react';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PROCESS STEPS DATA
+// ═══════════════════════════════════════════════════════════════════════════
+
+const processSteps = [
+  { icon: Mic, title: 'Capture', description: 'Record your meaningful sound or voice' },
+  { icon: AudioWaveform, title: 'Analyze', description: 'Amrita studies the unique frequency patterns' },
+  { icon: Paintbrush, title: 'Create', description: 'Hand-painted with gold leaf and premium materials' },
+  { icon: Package, title: 'Deliver', description: 'Museum-ready with certificate of authenticity' }
+];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PROCESS STEP COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
 
 interface ProcessStepProps {
-  number: string;
+  icon: LucideIcon;
   title: string;
   description: string;
 }
 
-function ProcessStep({ number, title, description }: ProcessStepProps) {
+function ProcessStep({ icon: Icon, title, description }: ProcessStepProps) {
   return (
     <div className="text-center">
-      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-500 font-bold text-sm mb-4">
-        {number}
+      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 text-gold-500 mb-4">
+        <Icon className="w-5 h-5" />
       </div>
       <h4 className="font-display text-lg text-white font-semibold mb-2">{title}</h4>
       <p className="text-white/50 text-sm leading-relaxed">{description}</p>
@@ -84,8 +106,9 @@ export function SoundByteSection() {
               a baby's first words, a loved one's message—and transforms it into a physical artwork.
               Created with 24k gold leaf, metallic pigments, and archival materials on gallery-grade canvas.
             </p>
-            <p className="text-gold-500/80 text-sm italic">
-              "A word is worth a thousand pictures."
+            <p className="text-gold-500/80 text-sm italic inline-flex items-center gap-2">
+              <Quote className="w-4 h-4 text-gold-500/50" />
+              A word is worth a thousand pictures.
             </p>
           </div>
         </motion.div>
@@ -100,26 +123,9 @@ export function SoundByteSection() {
             The Process
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <ProcessStep
-              number="1"
-              title="Capture"
-              description="Record your meaningful sound or voice"
-            />
-            <ProcessStep
-              number="2"
-              title="Analyze"
-              description="Amrita studies the unique frequency patterns"
-            />
-            <ProcessStep
-              number="3"
-              title="Create"
-              description="Hand-painted with gold leaf and premium materials"
-            />
-            <ProcessStep
-              number="4"
-              title="Deliver"
-              description="Museum-ready with certificate of authenticity"
-            />
+            {processSteps.map((step) => (
+              <ProcessStep key={step.title} {...step} />
+            ))}
           </div>
         </motion.div>
 
@@ -137,13 +143,21 @@ export function SoundByteSection() {
 
           {/* CTA */}
           <Link to="/commission">
-            <Button variant="primary" size="lg">
-              Commission Your Piece
+            <Button variant="primary" size="lg" className="group">
+              <span>Commission Your Piece</span>
+              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
 
-          <p className="mt-4 text-white/40 text-sm">
-            Complimentary consultation • 6-8 week creation time
+          <p className="mt-4 text-white/40 text-sm inline-flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5">
+              <MessageSquare className="w-3.5 h-3.5" />
+              Complimentary consultation
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" />
+              6-8 week creation time
+            </span>
           </p>
         </motion.div>
       </Container>

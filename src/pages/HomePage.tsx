@@ -6,9 +6,8 @@
  * 2. Her Artworks - Art systems and collections
  * 3. Her Exhibitions - Exhibitions and public art
  * 4. SoundBYTE - Introduction → Commission page
- * 5. Sonic Identity - Introduction → Sonic Identity page
- * 6. BYTEclub - Community signup
- * 7. Footer (in layout)
+ * 5. Sonic Identity + BYTEclub - Two column layout
+ * 6. Footer (in layout)
  */
 
 import {
@@ -16,8 +15,7 @@ import {
   ArtCollectionsSection,
   ExhibitionsSection,
   SoundByteSection,
-  SonicIdentitySection,
-  ByteclubSection
+  SonicByteclubSection
 } from '../components/sections';
 
 export function HomePage() {
@@ -35,11 +33,8 @@ export function HomePage() {
       {/* 4. SoundBYTE - Introduction → Commission */}
       <SoundByteSection />
 
-      {/* 5. Sonic Identity - Introduction → Sonic Identity page */}
-      <SonicIdentitySection />
-
-      {/* 6. BYTEclub - Community */}
-      <ByteclubSection />
+      {/* 5. Sonic Identity + BYTEclub - Two column layout */}
+      <SonicByteclubSection />
     </>
   );
 }

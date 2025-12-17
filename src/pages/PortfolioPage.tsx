@@ -19,6 +19,7 @@ import { ScrollReveal } from '../components/animations/ScrollReveal';
 import { artworks, categories, type Artwork } from '../data/artworks';
 import { springs, durations } from '../lib/animations';
 import { cn } from '../lib/utils';
+import { ChevronLeft, X, ArrowRight } from 'lucide-react';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // ARTWORK CARD COMPONENT
@@ -238,16 +239,12 @@ function ArtworkCard({ artwork, index, onClick }: ArtworkCardProps) {
           className="flex items-center gap-2 text-gold-500 text-sm font-medium"
         >
           <span>View Details</span>
-          <motion.svg
-            className="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <motion.div
             animate={{ x: isHovered ? [0, 5, 0] : 0 }}
             transition={{ duration: 1, repeat: isHovered ? Infinity : 0 }}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </motion.svg>
+            <ArrowRight className="w-4 h-4" />
+          </motion.div>
         </motion.div>
       </motion.div>
 
@@ -306,9 +303,7 @@ function ArtworkModal({ artwork, onClose }: ArtworkModalProps) {
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
         >
-          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <X className="w-5 h-5 text-white" />
         </button>
 
         <div className="grid md:grid-cols-2 gap-8 p-6 sm:p-8">
@@ -391,8 +386,9 @@ function ArtworkModal({ artwork, onClose }: ArtworkModalProps) {
 
             <div className="mt-auto pt-6 border-t border-white/10">
               <Link to="/commission">
-                <Button variant="primary" size="lg" fullWidth>
-                  Inquire About This Piece
+                <Button variant="primary" size="lg" fullWidth className="group">
+                  <span>Inquire About This Piece</span>
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
@@ -491,10 +487,8 @@ export function PortfolioPage() {
       <Container size="xl">
         {/* Page header */}
         <ScrollReveal direction="up" className="text-center mb-12 sm:mb-16">
-          <Link to="/" className="inline-flex items-center gap-2 text-gold-500 hover:text-gold-400 transition-colors mb-6">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+          <Link to="/" className="inline-flex items-center gap-2 text-gold-500 hover:text-gold-400 transition-colors mb-6 group">
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Home
           </Link>
           <Label variant="gold" className="mb-4">Complete Collection</Label>
@@ -563,8 +557,9 @@ export function PortfolioPage() {
               Commission your own SoundBYTE Original and transform your voice into timeless art.
             </p>
             <Link to="/commission">
-              <Button variant="primary" size="lg">
-                Start Your Commission
+              <Button variant="primary" size="lg" className="group">
+                <span>Start Your Commission</span>
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
