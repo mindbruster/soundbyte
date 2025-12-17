@@ -17,7 +17,9 @@
       "WebFetch(domain:amrita-art.lovable.app)",
       "Bash(curl \"https://app.scrapingbee.com/api/v1/?api_key=QYVKQY77QJLONHFE892AEC86CTMD41XL72DC4FUN9BKAJA71JVWBTGZQ8DKHV2J0QDCC8W7MY92Q03X5&url=https://amrita-art.lovable.app/&render_js=true&wait=3000\")",
       "Bash(npx tsc:*)",
-      "Bash(curl \"https://app.scrapingbee.com/api/v1/?api_key=QYVKQY77QJLONHFE892AEC86CTMD41XL72DC4FUN9BKAJA71JVWBTGZQ8DKHV2J0QDCC8W7MY92Q03X5&url=https://amrita-art.lovable.app/&render_js=true&wait=5000\")"
+      "Bash(curl \"https://app.scrapingbee.com/api/v1/?api_key=QYVKQY77QJLONHFE892AEC86CTMD41XL72DC4FUN9BKAJA71JVWBTGZQ8DKHV2J0QDCC8W7MY92Q03X5&url=https://amrita-art.lovable.app/&render_js=true&wait=5000\")",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

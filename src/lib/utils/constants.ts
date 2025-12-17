@@ -72,20 +72,20 @@ export const THREE_CONFIG = {
 
 /**
  * Brand colors (matching Tailwind config)
- * Currently using Emerald Green color scheme
+ * Currently using Custom Green (#33CC80) color scheme
  */
 export const COLORS = {
   gold: {
-    50: '#ecfdf5',
-    100: '#d1fae5',
-    200: '#a7f3d0',
-    300: '#6ee7b7',
-    400: '#34d399',
-    500: '#10b981', // Primary emerald
-    600: '#059669',
-    700: '#047857',
-    800: '#065f46',
-    900: '#064e3b'
+    50: '#e6fbf0',
+    100: '#c2f5db',
+    200: '#8aebbf',
+    300: '#5ce0a3',
+    400: '#33cc80',
+    500: '#33cc80', // Primary custom green
+    600: '#2ab36e',
+    700: '#22995c',
+    800: '#1a804a',
+    900: '#126638'
   },
   luxury: {
     black: '#0a0a0a',

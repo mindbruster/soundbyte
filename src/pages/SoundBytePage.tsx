@@ -119,9 +119,9 @@ function FloatingArtworkPreview() {
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
             <defs>
               <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#10b981" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#059669" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#10b981" stopOpacity="0.8" />
+                <stop offset="0%" stopColor="#33cc80" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#2ab36e" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#33cc80" stopOpacity="0.8" />
               </linearGradient>
             </defs>
             {Array.from({ length: 12 }).map((_, i) => (
@@ -307,7 +307,7 @@ function ProcessStep({ number, title, description, icon, index }: ProcessStepPro
 
         <motion.h4
           className="font-display text-xl text-white font-semibold mb-3"
-          animate={{ color: isHovered ? '#10b981' : '#ffffff' }}
+          animate={{ color: isHovered ? '#33cc80' : '#ffffff' }}
           transition={{ duration: 0.3 }}
         >
           {title}

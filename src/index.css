@@ -18,17 +18,17 @@
   --color-gold-900: #134e4a;
   */
 
-  /* OPTION 2: EMERALD GREEN (luxury) - Currently Active */
-  --color-gold-50: #ecfdf5;
-  --color-gold-100: #d1fae5;
-  --color-gold-200: #a7f3d0;
-  --color-gold-300: #6ee7b7;
-  --color-gold-400: #34d399;
-  --color-gold-500: #10b981;
-  --color-gold-600: #059669;
-  --color-gold-700: #047857;
-  --color-gold-800: #065f46;
-  --color-gold-900: #064e3b;
+  /* OPTION 2: CUSTOM GREEN (#33CC80) - Currently Active */
+  --color-gold-50: #e6fbf0;
+  --color-gold-100: #c2f5db;
+  --color-gold-200: #8aebbf;
+  --color-gold-300: #5ce0a3;
+  --color-gold-400: #33cc80;
+  --color-gold-500: #33cc80;
+  --color-gold-600: #2ab36e;
+  --color-gold-700: #22995c;
+  --color-gold-800: #1a804a;
+  --color-gold-900: #126638;
 
   /* OPTION 3: ORIGINAL GOLD
   --color-gold-50: #fefce8;
@@ -102,10 +102,10 @@
 
   @keyframes pulse-glow {
     0%, 100% {
-      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
+      filter: drop-shadow(0 0 8px rgba(51, 204, 128, 0.3));
     }
     50% {
-      filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5));
+      filter: drop-shadow(0 0 20px rgba(51, 204, 128, 0.5));
     }
   }
 

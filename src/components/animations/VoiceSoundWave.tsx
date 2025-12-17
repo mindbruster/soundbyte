@@ -40,7 +40,7 @@ const waveLayers: WaveLayer[] = [
     phase: 0,
     opacity: 0.9,
     strokeWidth: 3,
-    color: '#10b981', // Emerald primary
+    color: '#33cc80', // Custom green primary
     glow: true
   },
   // Secondary wave - follows the main wave
@@ -51,7 +51,7 @@ const waveLayers: WaveLayer[] = [
     phase: Math.PI / 6,
     opacity: 0.5,
     strokeWidth: 2,
-    color: '#34d399', // Emerald lighter
+    color: '#5ce0a3', // Custom green lighter
     glow: false
   }
 ];

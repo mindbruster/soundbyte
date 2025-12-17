@@ -178,8 +178,8 @@ export function SoundWaveCanvas({
         gl={{ antialias: true, alpha: true }}
       >
         <ambientLight intensity={0.3} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#10b981" />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#059669" />
+        <pointLight position={[10, 10, 10]} intensity={1} color="#33cc80" />
+        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#2ab36e" />
         
         <SoundWaveVisualizer frequencyData={frequencyData} isInteractive={isInteractive} />
         <ParticleField frequencyData={frequencyData} isInteractive={isInteractive} />

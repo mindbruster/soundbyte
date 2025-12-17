@@ -81,8 +81,8 @@ function SoundwaveLine({ analyser, dataArray, micActive }: SoundwaveProps) {
 
       const centerY = height * 0.5;
 
-      // Theme color: Emerald Green
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+      // Theme color: Custom Green #33CC80
+      ctx.strokeStyle = 'rgba(51, 204, 128, 0.4)';
       ctx.lineWidth = 2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -495,8 +495,8 @@ export function HeroSection() {
         onClick={initMicrophone}
         className={`absolute bottom-24 right-8 z-50 p-4 rounded-full border-2 transition-all duration-500 ${
           micActive
-            ? 'bg-[#10b981] text-black border-[#10b981] shadow-[0_0_20px_rgba(16,185,129,0.5)]'
-            : 'bg-black/50 text-[#10b981] border-[#10b981]/50 hover:bg-[#10b981]/20 hover:border-[#10b981]'
+            ? 'bg-[#33cc80] text-black border-[#33cc80] shadow-[0_0_20px_rgba(51,204,128,0.5)]'
+            : 'bg-black/50 text-[#33cc80] border-[#33cc80]/50 hover:bg-[#33cc80]/20 hover:border-[#33cc80]'
         }`}
         title={micActive ? 'Microphone active - speak to interact' : 'Enable microphone to interact with the soundwave'}
       >
@@ -522,8 +522,8 @@ export function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           className="absolute bottom-[104px] right-20 z-50 flex items-center gap-2"
         >
-          <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-          <span className="text-[#10b981] text-xs uppercase tracking-wider font-medium">Live</span>
+          <span className="w-2 h-2 rounded-full bg-[#33cc80] animate-pulse" />
+          <span className="text-[#33cc80] text-xs uppercase tracking-wider font-medium">Live</span>
         </motion.div>
       )}
 

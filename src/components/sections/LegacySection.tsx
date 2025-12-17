@@ -220,7 +220,7 @@ function PressLogo({ publication }: PressLogoProps) {
       <motion.span
         className="font-display text-xl sm:text-2xl font-medium tracking-wide cursor-default relative"
         animate={{
-          color: isHovered ? '#10b981' : 'rgba(255,255,255,0.35)',
+          color: isHovered ? '#33cc80' : 'rgba(255,255,255,0.35)',
         }}
         transition={{ duration: 0.3 }}
       >

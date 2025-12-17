@@ -28,49 +28,49 @@ const SECTION_CONFIGS: Record<string, SectionColorConfig> = {
   hero: {
     primary: new THREE.Color(0x0a0a0a),
     secondary: new THREE.Color(0x0a140f),
-    accent: new THREE.Color(0x10b981), // Emerald
+    accent: new THREE.Color(0x33cc80), // Custom green
     particleOpacity: 0.6,
     waveIntensity: 1.0
   },
   legacy: {
     primary: new THREE.Color(0x0d0d0d),
     secondary: new THREE.Color(0x0a140f),
-    accent: new THREE.Color(0x059669), // Emerald darker
+    accent: new THREE.Color(0x2ab36e), // Custom green darker
     particleOpacity: 0.5,
     waveIntensity: 0.8
   },
   portfolio: {
     primary: new THREE.Color(0x080808),
     secondary: new THREE.Color(0x08120d),
-    accent: new THREE.Color(0x34d399), // Emerald lighter
+    accent: new THREE.Color(0x5ce0a3), // Custom green lighter
     particleOpacity: 0.7,
     waveIntensity: 1.2
   },
   soundbyte: {
     primary: new THREE.Color(0x0c0c0c),
     secondary: new THREE.Color(0x0a140f),
-    accent: new THREE.Color(0x10b981), // Emerald
+    accent: new THREE.Color(0x33cc80), // Custom green
     particleOpacity: 0.8,
     waveIntensity: 1.5
   },
   sonic: {
     primary: new THREE.Color(0x0a0908),
     secondary: new THREE.Color(0x0a120d),
-    accent: new THREE.Color(0x047857), // Emerald darkest
+    accent: new THREE.Color(0x22995c), // Custom green darkest
     particleOpacity: 0.6,
     waveIntensity: 1.0
   },
   commission: {
     primary: new THREE.Color(0x0d0b0a),
     secondary: new THREE.Color(0x0c1610),
-    accent: new THREE.Color(0x6ee7b7), // Emerald lightest
+    accent: new THREE.Color(0x8aebbf), // Custom green lightest
     particleOpacity: 0.7,
     waveIntensity: 0.9
   },
   footer: {
     primary: new THREE.Color(0x050505),
     secondary: new THREE.Color(0x060a08),
-    accent: new THREE.Color(0x059669), // Emerald darker
+    accent: new THREE.Color(0x2ab36e), // Custom green darker
     particleOpacity: 0.4,
     waveIntensity: 0.5
   }
@@ -501,7 +501,7 @@ function ParticleSystem({ scrollProgress, currentSection, count = 300 }: Particl
       <pointsMaterial
         ref={materialRef}
         size={0.05}
-        color="#10b981"
+        color="#33cc80"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -624,8 +624,8 @@ function SoundWaveBars({ scrollProgress, currentSection, count = 64 }: SoundWave
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial
           ref={materialRef}
-          color="#10b981"
-          emissive="#10b981"
+          color="#33cc80"
+          emissive="#33cc80"
           emissiveIntensity={0.3}
           metalness={0.8}
           roughness={0.2}
@@ -655,8 +655,8 @@ function SceneContent({ scrollProgress, currentSection, sectionProgress }: Scene
     <>
       {/* Ambient lighting - dimmer in hero */}
       <ambientLight intensity={isHero ? 0.1 : 0.2} />
-      <pointLight position={[10, 10, 10]} intensity={isHero ? 0.3 : 0.8} color="#10b981" />
-      <pointLight position={[-10, -10, 5]} intensity={isHero ? 0.2 : 0.4} color="#059669" />
+      <pointLight position={[10, 10, 10]} intensity={isHero ? 0.3 : 0.8} color="#33cc80" />
+      <pointLight position={[-10, -10, 5]} intensity={isHero ? 0.2 : 0.4} color="#2ab36e" />
 
       {/* Interactive wave mesh - subtle in hero */}
       <WaveMesh
